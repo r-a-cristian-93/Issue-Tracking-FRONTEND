@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Help Desk - Manage Tickets</title>
+		<link rel="stylesheet" href="../style.css">
+		<link rel="stylesheet" href="../user/ticket.css">
+		<link rel="stylesheet" href="../admin/modal.css">
+		<script src="../user/navigation.js"></script>
+		<script src="../user/utility.js"></script>
+		<script src="../user/tickets.js"></script>
+		<script src="../admin/closemodal.js"></script>
+		<script src="../moderator/assignmodal.js"></script>
+		<script src="deletemodal.js"></script>
+		<script src="manage-tickets.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+		<meta charset="UTF-8">
+	</head>
+	<body class="theme-default">
+		<div id="top">
+			<div id="personal-menu">
+				<a href="#home" id="welcome-user"></a>
+				<a href="/helpdesk" class="button" onclick="document.cookie = 'JWT=; expires=-1; path=/';">Log Out</a>
+			</div>
+		</div>		
+		<div id="menu">
+			<span class="logo">HelpDesk.com</span>
+			<div class="user-logo">
+					<span class="user-logo-text">A</span>
+			</div>
+			<div class="access-level">
+				<span class="level">Access level:</span>
+				</br>
+				<span class="level">
+					<span class="green-dot"></span>
+					<span id="access-level"></span>
+				</span>
+			</div>
+			<span class="menu-title">Navigation Menu</span>
+		</div>	
+		<div id="content">
+			<h1>Manage Tickets</h1><h4>Filter tickets by department and status</h4>
+			<div id="tickets">	
+				<div id="filter">
+					<form name="filter">
+						<div class="filter-col">
+							<label>Department:</label>
+							<select name="department">
+								<option>All</option>					
+							</select>	
+						</div>	
+						<div class="filter-col">
+							<label>Status:</label>	
+							<select name="status">
+									<option>All</option>	
+							</select>
+						</div>
+						<div class="filter-col">
+							<button type="button" class="button" onclick="filterManageTickets();">Filter</button>
+						</div>
+						<div class="filter-col filter-total">Found</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="footer"> HelpDesk System © 2021 HelpDesk System </div>
+
+		<div id="assignModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-top">
+					<span class="modal-close" onclick="hideAssignModal();">&times;</span>
+					<h2 class="modal-title">Ticket</h2><h2 class="modal-title" id="assignId" ></h2>
+				</div>
+				<div class="modal-body">
+					<form name="assignTicketForm">
+						<label class="big-form"><b>Assign ticket to: </b></label>
+						<select name="assignTo" class="big-form">
+							<option>A</option>
+						</select>
+						<input class="modal-hidden" type="text" name="ticketId">
+						<button type="button" class="button big-form" onclick="assignTicket();">Assign ticket</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="closeModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-top">
+					<span class="modal-close" onclick="hideCloseModal();">&times;</span>
+					<h2 class="modal-title">Ticket</h2><h2 class="modal-title" id="closeId" ></h2>
+				</div>
+				<div class="modal-body">
+					<form name="closeTicketForm">
+						<label class="big-form"><b>Set closed ticket status</b></label>
+						<select name="status" class="big-form">
+							<option>Solved</option>
+							<option>Unsolved</option>
+						</select>
+						<input class="modal-hidden" type="text" name="ticketId">
+						<button type="button" class="button big-form" onclick="closeTicket();">Close ticket</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div id="deleteModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-top">
+					<span class="modal-close" onclick="hideDeleteModal();">&times;</span>
+					<h2 class="modal-title">Ticket</h2><h2 class="modal-title" id="deleteId"></h2>
+				</div>
+				<div class="modal-body">
+					<form name="deleteTicketForm">
+						<label class="big-form"><b>This ticket will be deleted from all records.</b></label>
+						<input class="modal-hidden" type="text" name="ticketId">
+						<button type="button" class="button big-form" onclick="deleteTicket();">Delete ticket</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+
+
+
+
+
+

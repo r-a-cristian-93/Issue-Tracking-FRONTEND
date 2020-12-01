@@ -1,0 +1,70 @@
+.modal {
+	display:none;
+	position:fixed;
+	left:0;
+	top:0;
+	z-index:1;
+	overflow:auto;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.4);
+	padding-top:100px;
+	}
+
+.modal-content {
+	max-width: 400px;
+	background-color: var(--color-background);
+	margin:auto;
+	border:1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	}
+
+.modal-top {
+	padding:10px;
+	background-color:var(--color-primary);
+	}
+	
+.modal-top h2 {
+	margin:10px;
+	}
+
+.modal-title {
+	color:var(--color-background);
+	display:inline;
+	}
+	
+	
+.modal-body {
+	padding:25px;
+	}
+	
+	/* The Close Button */
+.modal-close {
+  color: white;
+  float: right;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.filter-col {
+	display:inline-block;
+	padding:10px;
+	height:auto;
+	margin:auto;
+	}
+	
+.filter-total {
+	font-size:0.8em;
+	color:var(--color-text-secondary);
+	}
+	
+.modal-hidden {
+	display:none;
+	}
