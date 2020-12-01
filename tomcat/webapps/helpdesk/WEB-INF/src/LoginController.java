@@ -17,12 +17,15 @@ public class LoginController extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {		
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String passwordHash = "";
 		
 		try {
 			ResultSet resultSet = Helper.sqlQuery("SELECT * FROM users WHERE email='"+email+"';");
 			//if email was found in database
 			if(resultSet.next()){
-				if(password.equals(resultSet.getString("password"))){
+				String storedPasswordHash = resultSet.getString("password");
+				passwordHash = Password.generatePasswordHash(password);
+				if(passwordHash.equals(storedPasswordHash)){
 					String user_role = resultSet.getString("role");
 					String user_department = resultSet.getString("department");
 					int user_id = resultSet.getInt("ID");

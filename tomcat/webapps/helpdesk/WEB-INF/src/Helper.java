@@ -173,5 +173,4 @@ public class Helper {
 		
 		return jwt;
 	}
-		
 }	
