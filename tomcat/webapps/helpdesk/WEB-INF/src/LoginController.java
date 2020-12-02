@@ -30,10 +30,11 @@ public class LoginController extends HttpServlet {
 					String user_department = resultSet.getString("department");
 					int user_id = resultSet.getInt("ID");
 					try {
-						String key = "secret";
+						String key = ContextListener.getJwtKey();
+						String issuer = ContextListener.getJwtIssuer();
 						Algorithm algorithm = Algorithm.HMAC256(key);
 						String token = JWT.create()
-							.withIssuer("helpdesk.com")
+							.withIssuer(issuer)
 							.withClaim("user_id", user_id)
 							.withClaim("user_role", user_role)
 							.withClaim("user_email", email)

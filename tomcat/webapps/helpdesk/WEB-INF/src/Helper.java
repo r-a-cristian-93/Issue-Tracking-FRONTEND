@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.*;
 
 import com.auth0.jwt.*;
 import com.auth0.jwt.JWT;
@@ -13,10 +14,12 @@ import com.auth0.jwt.interfaces.*;
 
 import org.json.*;
 
-public class Helper {
-	public static Connection getConnection() throws SQLException{
-		String url="jdbc:mysql://hd_database:3306/helpdesk";
-		Connection connection = DriverManager.getConnection(url, "root", "root");
+public class Helper {	
+	public static Connection getConnection() throws SQLException {
+		String url = ContextListener.getSqlAddress();
+		String user =  ContextListener.getSqlUser();
+		String password = ContextListener.getSqlPassword();
+		Connection connection = DriverManager.getConnection(url, user, password);
 		return connection;
 	}
 	
@@ -162,10 +165,11 @@ public class Helper {
 		DecodedJWT jwt = null;
 	
 		try {
-			String key = "secret";
+			String key = ContextListener.getJwtKey();
+			String issuer = ContextListener.getJwtIssuer();
 			Algorithm algorithm = Algorithm.HMAC256(key);
 			JWTVerifier verifier = JWT.require(algorithm)
-				.withIssuer("helpdesk.com")
+				.withIssuer(issuer)
 				.build();
 			 jwt = verifier.verify(token);
 		} 
