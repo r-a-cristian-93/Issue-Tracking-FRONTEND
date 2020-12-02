@@ -14,19 +14,17 @@ public class RegisterController extends HttpServlet {
 		String role = request.getParameter("role");
 
 		if(email!=null && department!=null && role!=null){
-			String password = Helper.randomPassword(5);
-			String passwordHash = null;
 			try {
-				passwordHash = Password.generatePasswordHash(password);
-			}
-			catch (Exception e) {}
-			String sql = "INSERT INTO users (email, department, role, password) VALUES('"+email+"', '"+department+"', '"+role+"', '"+passwordHash+"');";
-			try {
+				int length = ContextListener.getIntParam("pwdLength");
+				String password = Helper.randomPassword(length);
+				String passwordHash = Password.generateHash(password);
+				String sql = "INSERT INTO users (email, department, role, password) VALUES('"+email+"', '"+department+"', '"+role+"', '"+passwordHash+"');";
 				Helper.sqlUpdate(sql);
 				//send email
 				registerStatus.put("Registration successfull. An email has been sent with the password." + password);
+				
 			}
-			catch (SQLException e) {
+			catch (Exception e) {
 				registerStatus.put(e.getMessage());
 			}	
 		}

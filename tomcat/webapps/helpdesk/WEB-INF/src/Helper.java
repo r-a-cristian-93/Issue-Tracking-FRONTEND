@@ -16,9 +16,9 @@ import org.json.*;
 
 public class Helper {	
 	public static Connection getConnection() throws SQLException {
-		String url = ContextListener.getSqlAddress();
-		String user =  ContextListener.getSqlUser();
-		String password = ContextListener.getSqlPassword();
+		String url = ContextListener.getStringParam("sqlAddress");
+		String user =  ContextListener.getStringParam("sqlUser");
+		String password = ContextListener.getStringParam("sqlPassword");
 		Connection connection = DriverManager.getConnection(url, user, password);
 		return connection;
 	}
@@ -165,8 +165,8 @@ public class Helper {
 		DecodedJWT jwt = null;
 	
 		try {
-			String key = ContextListener.getJwtKey();
-			String issuer = ContextListener.getJwtIssuer();
+			String key = ContextListener.getStringParam("jwtKey");
+			String issuer = ContextListener.getStringParam("jwtIssuer");
 			Algorithm algorithm = Algorithm.HMAC256(key);
 			JWTVerifier verifier = JWT.require(algorithm)
 				.withIssuer(issuer)

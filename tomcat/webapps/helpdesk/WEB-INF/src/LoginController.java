@@ -24,14 +24,14 @@ public class LoginController extends HttpServlet {
 			//if email was found in database
 			if(resultSet.next()){
 				String storedPasswordHash = resultSet.getString("password");
-				passwordHash = Password.generatePasswordHash(password);
+				passwordHash = Password.generateHash(password);
 				if(passwordHash.equals(storedPasswordHash)){
 					String user_role = resultSet.getString("role");
 					String user_department = resultSet.getString("department");
 					int user_id = resultSet.getInt("ID");
 					try {
-						String key = ContextListener.getJwtKey();
-						String issuer = ContextListener.getJwtIssuer();
+						String key = ContextListener.getStringParam("jwtKey");
+						String issuer = ContextListener.getStringParam("jwtIssuer");
 						Algorithm algorithm = Algorithm.HMAC256(key);
 						String token = JWT.create()
 							.withIssuer(issuer)

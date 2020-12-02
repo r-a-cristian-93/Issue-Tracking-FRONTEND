@@ -22,4 +22,20 @@
 		<param-name>jwtKey</param-name>
 		<param-value>secret</param-value>
 	</context-param>
+	<context-param>
+		<param-name>pwdLength</param-name>
+		<param-value>5</param-value>
+	</context-param>
+	<context-param>
+		<param-name>pwhHashLength</param-name>
+		<param-value>16</param-value>
+	</context-param>
+	<context-param>
+		<param-name>pwdHashIterations</param-name>
+		<param-value>1000</param-value>
+	</context-param>
+	<context-param>
+		<param-name>pwdHashSalt</param-name>
+		<param-value>1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16</param-value>
+	</context-param>
 </web-app>

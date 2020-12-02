@@ -5,11 +5,12 @@ import javax.crypto.SecretKeyFactory;
 import java.math.BigInteger;
 
 public class Password {	
-	public static String generatePasswordHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public static String generateHash(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {		
 		char[] charPassword = password.toCharArray();
-		byte[] salt = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
-		int iterations = 1000;
-		int length = 16;
+		byte[] salt = ContextListener.getByteArrayParam("pwdHashSalt");
+		int iterations = ContextListener.getIntParam("pwdHashIterations");
+		int length = ContextListener.getIntParam("pwhHashLength");
+		System.out.println(iterations + "  " + length);
 		
 		KeySpec spec = new PBEKeySpec(charPassword, salt, iterations, length*8);
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
