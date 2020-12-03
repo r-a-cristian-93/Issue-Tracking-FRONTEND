@@ -8,11 +8,11 @@
 	</context-param>
 	<context-param>
 		<param-name>sqlUser</param-name>
-		<param-value>root</param-value>
+		<param-value>hd_user</param-value>
 	</context-param>
 	<context-param>
 		<param-name>sqlPassword</param-name>
-		<param-value>root</param-value>
+		<param-value>hd_user</param-value>
 	</context-param>
 	<context-param>
 		<param-name>jwtIssuer</param-name>
