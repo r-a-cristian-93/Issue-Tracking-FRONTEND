@@ -27,6 +27,10 @@ public class Helper {
 		return Helper.getConnection().createStatement();
 	}
 	
+	public static PreparedStatement getPreparedStatement(String sql) throws SQLException{
+		return Helper.getConnection().prepareStatement(sql);
+	}
+	
 	public static ResultSet sqlQuery(String sql) throws SQLException{
 		return Helper.getStatement().executeQuery(sql);
 	}

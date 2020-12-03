@@ -20,7 +20,10 @@ public class LoginController extends HttpServlet {
 		String passwordHash = "";
 		
 		try {
-			ResultSet resultSet = Helper.sqlQuery("SELECT * FROM users WHERE email='"+email+"';");
+			String sql ="SELECT * FROM users WHERE email=?";
+			PreparedStatement prepStatement= Helper.getPreparedStatement(sql);
+			prepStatement.setString(1, email);
+			ResultSet resultSet = prepStatement.executeQuery();
 			//if email was found in database
 			if(resultSet.next()){
 				String storedPasswordHash = resultSet.getString("password");
