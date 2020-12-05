@@ -21,7 +21,8 @@ public class SuperTicketsController extends HttpServlet {
 			tickets.forEach(e->jsonTickets.put(new JSONObject(e)));
 		}
 		catch (SQLException e) {
-			jsonTickets.put(e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonTickets);		

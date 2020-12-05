@@ -14,18 +14,19 @@ public class NewTicketController extends HttpServlet {
 		String summary = request.getParameter("summary");
 		String issue = Helper.getBody(request);
 		JSONArray newTicketStatus = new JSONArray();
-		if(issue!=null) {
+		if(issue!=null && summary!=null && concernedDepartment!=null) {
 			try {
 				String sql = "INSERT INTO tickets(opened_by, summary, issue, concerned_department) VALUES("+userId+", '"+summary+"', '"+issue+"', '"+concernedDepartment+"');";
 				Helper.sqlUpdate(sql);
 				newTicketStatus.put("A new ticket was successfully created.<br/> You will be informed about the progress via email.");
 			}
 			catch (SQLException e) {
-				newTicketStatus.put(e.getMessage());
+				response.sendError(500, "Server Error");
+				e.printStackTrace();
 			}		
 		}
 		else {
-			newTicketStatus.put("Invalid request.");
+			newTicketStatus.put("Please complete all fields");
 		}
 		response.setContentType("application/json");
 		response.getWriter().print(newTicketStatus);

@@ -18,12 +18,10 @@ public class CountTicketsController extends HttpServlet {
 			jsonCount = Helper.getTicketsCount(userId);
 		}
 		catch (SQLException e) {
-			jsonCount.put("error", e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonCount);		
 	}
 }
-/*
-SELECT status, COUNT(*) tickets from tickets WHERE opened_by=2 GROUP BY status;
-*/

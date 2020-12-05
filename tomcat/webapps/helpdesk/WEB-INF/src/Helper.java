@@ -57,11 +57,12 @@ public class Helper {
 			while((line = reader.readLine()) != null) {
 				body.append(line);
 			}
-			return new String(body);
 		}
 		catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
+		return new String(body);
 	}
 	
 	public static ArrayList<TicketBean> getTickets(TicketFilterBean ticketFilter) throws SQLException {
@@ -160,7 +161,9 @@ public class Helper {
 				}
 			}				
 		}
-		catch(NullPointerException e) {}
+		catch(NullPointerException e) {
+			e.printStackTrace();
+		}
 		return token;
 	}
 	
@@ -177,8 +180,9 @@ public class Helper {
 				.build();
 			 jwt = verifier.verify(token);
 		} 
-		catch (Exception e){}
-		
+		catch (Exception e){
+			e.printStackTrace();
+		}		
 		return jwt;
 	}
 }	

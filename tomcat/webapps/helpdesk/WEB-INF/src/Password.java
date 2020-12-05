@@ -10,7 +10,6 @@ public class Password {
 		byte[] salt = ContextListener.getByteArrayParam("pwdHashSalt");
 		int iterations = ContextListener.getIntParam("pwdHashIterations");
 		int length = ContextListener.getIntParam("pwhHashLength");
-		System.out.println(iterations + "  " + length);
 		
 		KeySpec spec = new PBEKeySpec(charPassword, salt, iterations, length*8);
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");

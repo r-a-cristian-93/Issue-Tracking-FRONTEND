@@ -22,8 +22,8 @@ public class CloseTicketController extends HttpServlet{
 			response.getWriter().print("CLOSED");
 		}
 		catch (SQLException e) {
-			response.setContentType("text/html");
-			response.getWriter().print(e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 	}
 }

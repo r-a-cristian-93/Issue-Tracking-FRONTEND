@@ -25,11 +25,12 @@ public class RegisterController extends HttpServlet {
 				
 			}
 			catch (Exception e) {
-				registerStatus.put(e.getMessage());
+				response.sendError(500, "Server Error");
+				e.printStackTrace();
 			}	
 		}
 		else {
-			registerStatus.put("Invalid request.");
+			registerStatus.put("Please complete all fields.");
 		}		
 		response.setContentType("application/json");
 		response.getWriter().print(registerStatus);	

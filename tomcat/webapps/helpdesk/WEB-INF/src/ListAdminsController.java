@@ -22,7 +22,8 @@ public class ListAdminsController extends HttpServlet {
 			}
 		}
 		catch (SQLException e) {
-			jsonAdmins.put(e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonAdmins);		

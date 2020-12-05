@@ -16,7 +16,9 @@ public class AssignTicketController extends HttpServlet{
 		try {
 			Helper.sqlUpdate(sql);
 		}
-		catch (SQLException e) {}
-			
+		catch (SQLException e) {
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
+		}			
 	}
 }

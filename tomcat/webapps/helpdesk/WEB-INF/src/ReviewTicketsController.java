@@ -13,7 +13,6 @@ public class ReviewTicketsController extends HttpServlet {
 		int assignedTo = ((UserBean) request.getAttribute("user_bean")).getId();
 		String department=request.getParameter("department");
 		String status=request.getParameter("status");
-		System.out.println(department + "  " + status);
 	
 		JSONArray jsonTickets = new JSONArray();
 		try {
@@ -24,7 +23,8 @@ public class ReviewTicketsController extends HttpServlet {
 			tickets.forEach(e->jsonTickets.put(new JSONObject(e)));
 		}
 		catch (SQLException e) {
-			jsonTickets.put(e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonTickets);		

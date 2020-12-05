@@ -6,8 +6,7 @@ import org.json.*;
 
 @WebServlet(value="/user/navigation")
 public class NavigationController extends HttpServlet {
-	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {	
 		UserBean userBean = (UserBean) request.getAttribute("user_bean");
 		String role = userBean.getRole();
 		

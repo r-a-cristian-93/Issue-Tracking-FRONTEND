@@ -14,7 +14,10 @@ public class ListStatusController extends HttpServlet {
 		try {
 			jsonStatus = Helper.getOptions("status");
 		}
-		catch (SQLException e) {}
+		catch (SQLException e) {
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
+		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonStatus);		
 	}

@@ -14,7 +14,10 @@ public class ListRolesController extends HttpServlet {
 		try {
 			jsonRoles = Helper.getOptions("roles");
 		}
-		catch (SQLException e) {}
+		catch (SQLException e) {
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
+			}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonRoles);		
 	}

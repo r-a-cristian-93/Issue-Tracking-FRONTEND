@@ -6,7 +6,7 @@ public class TicketBean {
 	private String status;
 	private String issue;
 	private String summary;
-	private String openedByDepartment; //openedByDepartment
+	private String openedByDepartment;
 	//private String concerndeDepartment
 	
 	public TicketBean() {}

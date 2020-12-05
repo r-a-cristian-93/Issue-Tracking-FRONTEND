@@ -13,6 +13,9 @@ public class DeleteTicketController extends HttpServlet {
 			String sql = "DELETE FROM tickets WHERE ID="+ticketId+";";
 			Helper.sqlUpdate(sql);
 		}
-		catch (SQLException e) {}		
+		catch (SQLException e) {
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
+		}		
 	}
 }

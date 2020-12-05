@@ -14,7 +14,7 @@ import java.util.*;
 @WebServlet(value="/login")
 public class LoginController extends HttpServlet {
 	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {		
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {	
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String passwordHash = "";
@@ -32,7 +32,7 @@ public class LoginController extends HttpServlet {
 					String user_role = resultSet.getString("role");
 					String user_department = resultSet.getString("department");
 					int user_id = resultSet.getInt("ID");
-					try {
+					{
 						String key = ContextListener.getStringParam("jwtKey");
 						String issuer = ContextListener.getStringParam("jwtIssuer");
 						Algorithm algorithm = Algorithm.HMAC256(key);
@@ -53,9 +53,7 @@ public class LoginController extends HttpServlet {
 						
 						response.addCookie(jwtCookie);
 						response.sendRedirect(request.getContextPath()+"/user/dashboard.html");
-					} catch (JWTCreationException e){
-						response.setContentType("text/html");
-						response.getWriter().print(e.getMessage());}			
+					}			
 				}
 				else {
 					response.setContentType("text/html");
@@ -68,8 +66,8 @@ public class LoginController extends HttpServlet {
 			}
 		}
 		catch(Exception e) {
-			response.setContentType("text/html");
-			response.getWriter().print(e.getMessage());
+			response.sendError(500, "Server Error");
+			e.printStackTrace();
 		}
 	}
 }

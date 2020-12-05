@@ -14,7 +14,10 @@ public class ListDepartmentsController extends HttpServlet {
 		try {
 			jsonDepartments = Helper.getOptions("departments");
 		}
-		catch (SQLException e) {}
+		catch (SQLException e) {
+			response.sendError(500, "Server Error");
+			e.printStackTrace();			
+		}
 		response.setContentType("application/json");
 		response.getWriter().print(jsonDepartments);		
 	}
