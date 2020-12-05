@@ -1,7 +1,6 @@
 FROM tomcat
 COPY lib/json-20200518.jar /usr/local/tomcat/lib
 COPY lib/mysql-connector-java-8.0.22.jar /usr/local/tomcat/lib
-
 COPY lib/commons-codec-1.14.jar /usr/local/tomcat/lib
 COPY lib/jackson-databind-2.10.3.jar /usr/local/tomcat/lib
 COPY lib/jackson-annotations-2.10.3.jar /usr/local/tomcat/lib
