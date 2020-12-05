@@ -28,13 +28,8 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=5
-FILE_NAME_0=738;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2FWEB-INF%2Fsrc%2FHelper.java;0;4
-FILE_NAME_1=422;XML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2FWEB-INF%2Fweb.xml;0;4
-FILE_NAME_2=668;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2FWEB-INF%2Fsrc%2FContextListener.java;0;4
-FILE_NAME_3=1100;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2FWEB-INF%2Fsrc%2FLoginController.java;0;4
-FILE_NAME_4=0;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2FWEB-INF%2Fsrc%2FCountTicketsController.java;0;4
-FILE_NAME_5=0;SQL;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fbackup.sql;0;4
+current_page=0
+FILE_NAME_0=207;Sh;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fcreate.sh;0;4
 
 [VTE]
 last_dir=/home/taifun/NetBeansProjects/Manual
