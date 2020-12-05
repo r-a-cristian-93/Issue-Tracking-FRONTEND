@@ -181,8 +181,8 @@ public class Helper {
 			 jwt = verifier.verify(token);
 		} 
 		catch (Exception e){
-			e.printStackTrace();
-		}		
+			e.printStackTrace();			
+		}
 		return jwt;
 	}
 }	
