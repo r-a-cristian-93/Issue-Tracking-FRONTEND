@@ -10,8 +10,10 @@ public class DeleteTicketController extends HttpServlet {
 		int ticketId = Integer.valueOf(request.getParameter("ticketId"));
 		
 		try {
-			String sql = "DELETE FROM tickets WHERE ID="+ticketId+";";
-			Helper.sqlUpdate(sql);
+			String sql = "DELETE FROM tickets WHERE ID=?;";
+			PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+			prepStatement.setInt(1, ticketId);
+			prepStatement.executeUpdate();
 		}
 		catch (SQLException e) {
 			response.sendError(500, "Server Error");

@@ -5,6 +5,7 @@ public class TicketFilterBean {
 	private String status;
 	private String openedByDepartment;
 	private String concernedDepartment;
+	private int restraints = 0;
 	
 	public TicketFilterBean() {}
 	
@@ -51,6 +52,9 @@ public class TicketFilterBean {
 	public String getConcernedDepartment() {
 		return concernedDepartment;
 	}
+	public int getRestraints() {
+		return restraints;
+	}
 	
 	@Override
 	public String toString() {
@@ -58,25 +62,31 @@ public class TicketFilterBean {
 		
 		if(ticketId>=0) {
 			filter+=" AND t.ID="+ticketId;
+			restraints++;
 		}
 		if(openedBy>=0) {
 			filter+=" AND t.opened_by="+openedBy;
+			restraints++;
 		}
 		if(assignedTo>=0) {
 			filter+=" AND t.assigned_to="+assignedTo;
+			restraints++;
 		}
 		if(status!=null) {
 			if(!status.equals("All")) {
 				filter+=" AND t.status='"+status+"'";
 			}
+			restraints++;
 		}
 		if(openedByDepartment!=null) {
 			if(!openedByDepartment.equals("All")) {
 				filter+=" AND uo.department='"+openedByDepartment+"'";
 			}
+			restraints++;
 		}
 		if(concernedDepartment!=null) {
 			filter+=" AND t.concerned_department='"+concernedDepartment+"'";
+			restraints++;
 		}
 		return filter;
 	}

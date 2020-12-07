@@ -73,8 +73,7 @@ public class Helper {
 							"LEFT JOIN users uo ON t.opened_by=uo.ID "+
 							"LEFT JOIN users ua ON t.assigned_to=ua.ID "+
 							"LEFT JOIN users uc ON t.closed_by=uc.ID "+
-							ticketFilter + ";";
-		
+							ticketFilter + ";";		
 		ResultSet resultSet = Helper.sqlQuery(sql);
 		while(resultSet.next()){
 			int id = resultSet.getInt("ID");
@@ -107,7 +106,6 @@ public class Helper {
 		while(resultSet.next()){
 			int id = resultSet.getInt("ID");
 			String email = resultSet.getString("email");
-			System.out.println(id+" " + email);
 			admins.put(new JSONObject().put("id", id).put("email", email));
 		}
 		return admins;
@@ -122,7 +120,6 @@ public class Helper {
 		while(resultSet.next()){
 			int id = resultSet.getInt("ID");
 			String email = resultSet.getString("email");
-			System.out.println(id+" " + email);
 			admins.put(new JSONObject().put("id", id).put("email", email));
 		}
 		return admins;
@@ -141,8 +138,10 @@ public class Helper {
 	
 	public static JSONObject getTicketsCount(int userId) throws SQLException {
 		JSONObject count = new JSONObject();
-		String sql = "SELECT status, COUNT(*) no_of_tickets from tickets WHERE opened_by="+userId+" GROUP BY status;";
-		ResultSet resultSet = Helper.sqlQuery(sql);
+		String sql = "SELECT status, COUNT(*) no_of_tickets from tickets WHERE opened_by=? GROUP BY status;";
+		PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+		prepStatement.setInt(1, userId);
+		ResultSet resultSet = prepStatement.executeQuery();
 		while(resultSet.next()){
 			String status = resultSet.getString("status");
 			int noOfTickets = Integer.valueOf(resultSet.getString("no_of_tickets"));

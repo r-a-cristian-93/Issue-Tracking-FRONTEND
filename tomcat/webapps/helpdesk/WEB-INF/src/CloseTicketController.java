@@ -14,12 +14,13 @@ public class CloseTicketController extends HttpServlet{
 		String status = request.getParameter("status");
 		int closedBy = ((UserBean) request.getAttribute("user_bean")).getId();
 		
-		String sql = "UPDATE tickets SET status='"+status+"', closed_by="+closedBy+" WHERE ID="+ticketId+";";
-		System.out.println(sql);
+		String sql = "UPDATE tickets SET status=?, closed_by=? WHERE ID=?;";
 		try {
-			Helper.sqlUpdate(sql);
-			response.setContentType("text/html");
-			response.getWriter().print("CLOSED");
+			PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+			prepStatement.setString(1, status);
+			prepStatement.setInt(2, closedBy);
+			prepStatement.setInt(3, ticketId);
+			prepStatement.executeUpdate();
 		}
 		catch (SQLException e) {
 			response.sendError(500, "Server Error");

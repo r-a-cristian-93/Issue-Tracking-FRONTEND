@@ -18,8 +18,13 @@ public class RegisterController extends HttpServlet {
 				int length = ContextListener.getIntParam("pwdLength");
 				String password = Helper.randomPassword(length);
 				String passwordHash = Password.generateHash(password);
-				String sql = "INSERT INTO users (email, department, role, password) VALUES('"+email+"', '"+department+"', '"+role+"', '"+passwordHash+"');";
-				Helper.sqlUpdate(sql);
+				String sql = "INSERT INTO users (email, department, role, password) VALUES(?, ?, ?, ?);";
+				PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+				prepStatement.setString(1, email);
+				prepStatement.setString(2, department);
+				prepStatement.setString(3, role);
+				prepStatement.setString(4, passwordHash);
+				prepStatement.executeUpdate();
 				//send email
 				registerStatus.put("Registration successfull. An email has been sent with the password." + password);
 				

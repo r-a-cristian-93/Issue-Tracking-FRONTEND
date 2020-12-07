@@ -16,8 +16,13 @@ public class NewTicketController extends HttpServlet {
 		JSONArray newTicketStatus = new JSONArray();
 		if(issue!=null && summary!=null && concernedDepartment!=null) {
 			try {
-				String sql = "INSERT INTO tickets(opened_by, summary, issue, concerned_department) VALUES("+userId+", '"+summary+"', '"+issue+"', '"+concernedDepartment+"');";
-				Helper.sqlUpdate(sql);
+				String sql = "INSERT INTO tickets(opened_by, summary, issue, concerned_department) VALUES(?, ?, ?, ?);";
+				PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+				prepStatement.setInt(1, userId);
+				prepStatement.setString(2, summary);
+				prepStatement.setString(3, issue);
+				prepStatement.setString(4, concernedDepartment);
+				prepStatement.executeUpdate();
 				newTicketStatus.put("A new ticket was successfully created.<br/> You will be informed about the progress via email.");
 			}
 			catch (SQLException e) {
