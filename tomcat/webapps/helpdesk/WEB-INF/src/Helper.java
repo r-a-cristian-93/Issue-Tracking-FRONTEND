@@ -66,15 +66,29 @@ public class Helper {
 	}
 	
 	public static ArrayList<TicketBean> getTickets(TicketFilterBean ticketFilter) throws SQLException {
-		ArrayList<TicketBean> tickets = new ArrayList<>();
+		ArrayList<TicketBean> tickets = new ArrayList<>();	
 		
 		String sql = "SELECT t.ID, t.status, t.summary, t.issue, uo.email opened_by, uo.department opened_by_department, ua.email assigned_to, uc.email closed_by "+ 
 							"FROM tickets t "+
 							"LEFT JOIN users uo ON t.opened_by=uo.ID "+
 							"LEFT JOIN users ua ON t.assigned_to=ua.ID "+
 							"LEFT JOIN users uc ON t.closed_by=uc.ID "+
-							ticketFilter + ";";		
-		ResultSet resultSet = Helper.sqlQuery(sql);
+							ticketFilter + ";";	
+							
+		PreparedStatement prepStatement = Helper.getPreparedStatement(sql);
+		Iterator<Object> rstr = ticketFilter.getRestraints().values().iterator();
+		int counter = 0;
+		while(rstr.hasNext()){			
+			counter++;
+			Object obj = rstr.next();
+			if(obj instanceof String) {
+				prepStatement.setString(counter, (String)obj);
+			}
+			if(obj instanceof Integer) {
+				prepStatement.setInt(counter, (int)obj);
+			}
+		}
+		ResultSet resultSet =prepStatement.executeQuery();
 		while(resultSet.next()){
 			int id = resultSet.getInt("ID");
 			String status = resultSet.getString("status");

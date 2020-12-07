@@ -1,94 +1,54 @@
+import java.util.*;
+
 public class TicketFilterBean {
-	private int ticketId = -1;
-	private int openedBy = -1;
-	private int assignedTo = -1;
-	private String status;
-	private String openedByDepartment;
-	private String concernedDepartment;
-	private int restraints = 0;
+	private Map<String, Object> restraints = new LinkedHashMap<>();
 	
 	public TicketFilterBean() {}
-	
-	public TicketFilterBean setTicketId(int ticketId) {
-		this.ticketId=ticketId;
+		
+	public TicketFilterBean setTicketId(int value) {
+		restraints.put("t.ID", value);
 		return this;
 	}	
-	public TicketFilterBean setOpenedBy(int openedBy) {
-		this.openedBy=openedBy;
+	public TicketFilterBean setOpenedBy(int value) {
+		restraints.put("t.opened_by", value);
 		return this;
 	}
-	public TicketFilterBean setAssignedTo(int assignedTo) {
-		this.assignedTo=assignedTo;
+	public TicketFilterBean setAssignedTo(int value) {
+		restraints.put("t.assigned_to", value);
 		return this;
 	}
-	public TicketFilterBean setStatus(String status) {
-		this.status=status;
+	public TicketFilterBean setStatus(String value) {
+		if(!value.equals("All")){
+			restraints.put("t.status", value);
+		}
 		return this;
 	}
-	public TicketFilterBean setOpenedByDepartment(String openedByDepartment) {
-		this.openedByDepartment=openedByDepartment;
+	public TicketFilterBean setOpenedByDepartment(String value) {
+		if(!value.equals("All")){
+			restraints.put("uo.department", value);
+		}
 		return this;
 	}
-	public TicketFilterBean setConcernedDepartment(String concernedDepartment) {
-		this.concernedDepartment=concernedDepartment;
+	public TicketFilterBean setConcernedDepartment(String value) {
+		restraints.put("t.concerned_department", value);
 		return this;
 	}
 	
-	public int getTicketId() {
-		return ticketId;
-	}	
-	public int getOpenedBy() {
-		return openedBy;
+	public void setRestraints(Map<String, Object> restraints) {
+		this.restraints = restraints;
 	}
-	public int getAssignedTo() {
-		return assignedTo;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public String getOpenedByDepartment() {
-		return openedByDepartment;
-	}
-	public String getConcernedDepartment() {
-		return concernedDepartment;
-	}
-	public int getRestraints() {
+	
+	public Map<String, Object> getRestraints() {
 		return restraints;
 	}
 	
 	@Override
 	public String toString() {
-		String filter = "WHERE 1=1";
+		StringBuilder filter = new StringBuilder("WHERE 1=1");
 		
-		if(ticketId>=0) {
-			filter+=" AND t.ID="+ticketId;
-			restraints++;
-		}
-		if(openedBy>=0) {
-			filter+=" AND t.opened_by="+openedBy;
-			restraints++;
-		}
-		if(assignedTo>=0) {
-			filter+=" AND t.assigned_to="+assignedTo;
-			restraints++;
-		}
-		if(status!=null) {
-			if(!status.equals("All")) {
-				filter+=" AND t.status='"+status+"'";
-			}
-			restraints++;
-		}
-		if(openedByDepartment!=null) {
-			if(!openedByDepartment.equals("All")) {
-				filter+=" AND uo.department='"+openedByDepartment+"'";
-			}
-			restraints++;
-		}
-		if(concernedDepartment!=null) {
-			filter+=" AND t.concerned_department='"+concernedDepartment+"'";
-			restraints++;
-		}
-		return filter;
-	}
-	
+		restraints.forEach((k,v) -> {
+			filter.append(" AND " + k + "=?");
+		});	
+		return filter.toString();
+	}	
 }
