@@ -47,6 +47,7 @@
 .small:hover {
 	background-position: left;
 	color:white;
+	cursor: pointer;
 	}
 
 .open-trans {
