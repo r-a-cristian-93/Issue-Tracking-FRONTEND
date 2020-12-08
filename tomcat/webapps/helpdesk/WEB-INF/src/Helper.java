@@ -48,23 +48,7 @@ public class Helper {
 		}
 		return password.toString();
 	}
-	
-	public static String getBody(HttpServletRequest request) {
-		StringBuilder body = new StringBuilder();
-		try {
-			BufferedReader reader = request.getReader();
-			String line = null;
-			while((line = reader.readLine()) != null) {
-				body.append(line);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		return new String(body);
-	}
-	
+		
 	public static ArrayList<TicketBean> getTickets(TicketFilterBean ticketFilter) throws SQLException {
 		ArrayList<TicketBean> tickets = new ArrayList<>();	
 		

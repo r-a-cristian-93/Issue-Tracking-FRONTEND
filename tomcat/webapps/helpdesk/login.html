@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title></title>
+		<title>Log in</title>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="style-login.css"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
@@ -9,15 +9,16 @@
 	<body class="theme-default">
 		<div id="login-page">
 			<div id="login">
-				<form name="login" method="POST" action="/helpdesk/login">
-					<h1>LOG IN</h1>
-					<br/>
-					<label class="big-form"><b>Email</b></label>
-					<input type="text" class="big-form" name="email" placeholder="Enter your email address" required/>
-					<label class="big-form"><b>Password</b></label>
-					<input type="password" class="big-form" name="password" placeholder="Enter your password" required/>
-					<button type="submit" class="button big-form">LOG IN</button>
-				</form>	
+				<div class="simple-box">
+					<div class="simple-box-title">LOG IN</div>
+					<form name="login" method="POST" action="/helpdesk/login"  class="simple-box-content">						
+						<label class="big-form"><b>Email</b></label>
+						<input type="text" class="big-form" name="email" placeholder="Enter your email address" required/>
+						<label class="big-form"><b>Password</b></label>
+						<input type="password" class="big-form" name="password" placeholder="Enter your password" required/>
+						<button type="submit" class="button big-form">LOG IN</button>
+					</form>	
+				</div>
 			</div>	
 		</div>
 	</body>

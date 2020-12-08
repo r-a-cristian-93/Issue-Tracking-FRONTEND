@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Help Desk - New Ticket</title>
+		<title>Help Desk - New Ticket Created</title>
 		<link rel="stylesheet" href="../style.css">
 		<script src="../user/utility.js"></script>
 		<script src="../user/navigation.js"></script>
-		<script src="newticket.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 		<meta charset="UTF-8">
 	</head>
@@ -32,21 +31,13 @@
 			<span class="menu-title">Navigation Menu</span>
 		</div>	
 		<div id="content">
-			<h1>Open New Ticket</h1><h4>Please fill in the form below to open a new ticket.</h4>
+			<h1>New Ticket Created</h1><h4></h4>
 			<div id="newticket" class="simple-box">
 				<div class="simple-box-title">
 					<img class="box-icon" src="../icons/New Ticket.png">New Ticket
 				</div>
 				<div class="simple-box-content">
-					<form name="newticket" method="post" action="/helpdesk/user/newticket">
-						<label class="big-form">Concerned department</label>
-						<select type="text" class="big-form space-bottom" name="concernedDepartment"></select>
-						<label class="big-form">Ticket summary</label>
-						<input type="text" class="big-form space-bottom" name="summary" maxlength="50" placeholder="Summay" required></input>
-						<label class="big-form">Detailed issue</label>
-						<textarea name="issue" placeholder="Write your message here" maxlength="255" required></textarea>
-						<button type="submit" class="button big-form">Submit</button>			
-					</form>
+					A new ticket was successfully created. You will be informed about the progress via email.
 				</div>
 			</div>
 		</div>

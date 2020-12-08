@@ -56,13 +56,11 @@ public class LoginController extends HttpServlet {
 					}			
 				}
 				else {
-					response.setContentType("text/html");
-					response.getWriter().print("Invalid Password.");
+					response.sendRedirect(request.getContextPath()+"/login-failed.html");
 				}
 			}
 			else {
-				response.setContentType("text/html");
-				response.getWriter().print("Invalid Email address.");
+				response.sendRedirect(request.getContextPath()+"/login-failed.html");
 			}
 		}
 		catch(Exception e) {

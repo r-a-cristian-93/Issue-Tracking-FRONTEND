@@ -26,7 +26,7 @@ public class RegisterController extends HttpServlet {
 				prepStatement.setString(4, passwordHash);
 				prepStatement.executeUpdate();
 				//send email
-				registerStatus.put("Registration successfull. An email has been sent with the password." + password);
+				response.sendRedirect(request.getContextPath()+"/owner/register-successful.html");
 				
 			}
 			catch (Exception e) {
@@ -35,9 +35,7 @@ public class RegisterController extends HttpServlet {
 			}	
 		}
 		else {
-			registerStatus.put("Please complete all fields.");
+			response.sendError(400, "Invalid request");
 		}		
-		response.setContentType("application/json");
-		response.getWriter().print(registerStatus);	
 	}
 }

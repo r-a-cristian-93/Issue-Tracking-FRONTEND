@@ -36,16 +36,15 @@
 			<div id="register" class="simple-box">
 				<div class="simple-box-title"><img src="../icons/Register.png" class="box-icon">Register new user</div>
 				<div class="simple-box-content">
-					<form name="register">
+					<form name="register" method="get" action="/helpdesk/owner/register">
 						<label class="big-form">Email</label>
 						<input type="text" class="big-form space-bottom" name="email" placeholder="Enter email address" required/>
 						<label class="big-form">Department</label>
 						<select class="big-form space-bottom" name="department" required></select>
 						<label class="big-form">Role</label>
 						<select class="big-form space-bottom" name="role" required></select>
-						<button type="button" class="button big-form" onclick="registerUser();">Register</button>
+						<button type="submit" class="button big-form">Register</button>
 					</form>
-					<div id="response" style="color:red; text-align:center;"></div>
 				</div>
 			</div>
 		</div>
