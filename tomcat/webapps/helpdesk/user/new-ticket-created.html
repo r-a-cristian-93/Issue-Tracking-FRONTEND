@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Help Desk - New Ticket Created</title>
+		<link rel="stylesheet" href="../style.css">
+		<script src="../user/utility.js"></script>
+		<script src="../user/navigation.js"></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
+		<meta charset="UTF-8">
+	</head>
+	<body class="theme-default">
+		<div id="top">
+			<div id="show-menu" onclick="showMenu();"><img src="../icons/burger.png"></div>	
+			<span class="logo-small">HelpDesk.com</span>
+			<div id="personal-menu">
+				<a href="#home" id="welcome-user"></a>
+				<a href="/helpdesk" class="button" onclick="document.cookie = 'JWT=; expires=-1; path=/';">Log Out</a>
+			</div>
+		</div>		
+		<div id="menu">
+			<span class="logo">HelpDesk.com</span>
+			<div class="user-logo">
+					<span class="user-logo-text">A</span>
+			</div>
+			<div class="access-level">
+				<span class="level">Access level:</span>
+				</br>
+				<span class="level">
+					<span class="green-dot"></span>
+					<span id="access-level"></span>
+				</span>
+			</div>
+			<span class="menu-title">Navigation Menu</span>
+		</div>	
+		<div id="content">
+			<h1>New Ticket Created</h1><h4></h4>
+			<div id="newticket" class="simple-box">
+				<div class="simple-box-title">
+					<img class="box-icon" src="../icons/New Ticket.png">New Ticket
+				</div>
+				<div class="simple-box-content">
+					A new ticket was successfully created. You will be informed about the progress via email.
+				</div>
+			</div>
+		</div>
+		<div id="footer"> HelpDesk System © 2021 HelpDesk System </div>
+	</body>
+</html>
