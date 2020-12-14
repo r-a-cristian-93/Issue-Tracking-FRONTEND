@@ -6,7 +6,8 @@ function getDepartments(parse, select) {
 			parse(JSON.parse(this.responseText), select);
 		}		
 	}
-	request.open('GET', '/helpdesk/user/listdepartments');
+	//request.open('GET', '/helpdesk/user/listdepartments');
+	request.open('GET', '/helpdesk-rest/options/getDepartments');
 	request.send();
 }
 
@@ -17,7 +18,8 @@ function getRoles(parse, select) {
 			parse(JSON.parse(this.responseText), select);
 		}		
 	}
-	request.open('GET', '/helpdesk/user/listroles');
+	//request.open('GET', '/helpdesk/user/listroles');
+	request.open('GET', '/helpdesk-rest/options/getRoles');
 	request.send();
 }
 
@@ -28,14 +30,15 @@ function getStatus(parse, select) {
 			parse(JSON.parse(this.responseText), select);
 		}		
 	}
-	request.open('GET', '/helpdesk/user/liststatus');
+	//request.open('GET', '/helpdesk/user/liststatus');
+	request.open('GET', '/helpdesk-rest/options/getStatus');
 	request.send();
 }
 
 function setOptions(list, select) {
 	for(i=0; i<list.length; i++) {
 		var option = document.createElement('option');
-		option.appendChild(document.createTextNode(list[i]));
+		option.appendChild(document.createTextNode(list[i].value));
 		select.appendChild(option);
 	}
 }

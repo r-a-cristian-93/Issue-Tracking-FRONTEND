@@ -28,7 +28,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=0
+FILE_NAME_0=1255;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Futility.js;0;4
+FILE_NAME_1=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Fnewticket.js;0;4
 
 [VTE]
 last_dir=/home/taifun/NetBeansProjects/Manual
