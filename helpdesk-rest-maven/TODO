@@ -1,0 +1,26 @@
+Endpoints to implement
+
+AssignTicketController.java
+CloseTicketController.java
+CountTicketsController.java
+DeleteTicketController.java
+GetTicketController.java	
+ManageTicketsController.java
+NewTicketController.java
+ReviewTicketsController.java
+SuperTicketsController.java
+
+NavigationController.java
+RegisterController.java
+LoginController.java
+
+
+======options======
+ListAdminsController.java			ok		/options/get/admins
+											/options/get/admins/{department}
+ListDepartmentsController.java		ok		/options/get/departments
+ListRolesController.java			ok		/options/get/roles
+ListStatusController.java			ok		/options/get/status
+
+=====tickets=====
+MyTicketsController.java					/tickets/get/personal

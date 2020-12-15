@@ -28,7 +28,8 @@ function listAdmins() {
 			}
 		}
 	}
-	request.open('GET', '/helpdesk/moderator/listadmins');
+	//request.open('GET', '/helpdesk/moderator/listadmins');
+	request.open('GET', '/helpdesk-rest/options/get/admins');
 	request.send();
 }
 

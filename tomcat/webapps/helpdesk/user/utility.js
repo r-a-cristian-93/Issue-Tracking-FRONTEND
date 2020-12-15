@@ -7,7 +7,7 @@ function getDepartments(parse, select) {
 		}		
 	}
 	//request.open('GET', '/helpdesk/user/listdepartments');
-	request.open('GET', '/helpdesk-rest/options/getDepartments');
+	request.open('GET', '/helpdesk-rest/options/get/departments');
 	request.send();
 }
 
@@ -19,7 +19,7 @@ function getRoles(parse, select) {
 		}		
 	}
 	//request.open('GET', '/helpdesk/user/listroles');
-	request.open('GET', '/helpdesk-rest/options/getRoles');
+	request.open('GET', '/helpdesk-rest/options/get/roles');
 	request.send();
 }
 
@@ -31,7 +31,7 @@ function getStatus(parse, select) {
 		}		
 	}
 	//request.open('GET', '/helpdesk/user/liststatus');
-	request.open('GET', '/helpdesk-rest/options/getStatus');
+	request.open('GET', '/helpdesk-rest/options/get/status');
 	request.send();
 }
 

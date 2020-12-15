@@ -55,6 +55,7 @@ function refreshTicket(ticketId) {
 			old.parentNode.replaceChild(ticket, old);
 		}
 	}
-	request.open('GET', '/helpdesk/admin/getticket?id='+ ticketId);
+	//request.open('GET', '/helpdesk/admin/getticket?id='+ ticketId);
+	request.open('GET', '/helpdesk-rest/tickets/get/byId/'+ticketId);
 	request.send();
 }
