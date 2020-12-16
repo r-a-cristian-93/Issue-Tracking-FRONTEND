@@ -23,4 +23,4 @@ ListRolesController.java			ok		/options/get/roles
 ListStatusController.java			ok		/options/get/status
 
 =====tickets=====
-MyTicketsController.java					/tickets/get/personal
+MyTicketsController.java			ok		/tickets/get/filter?

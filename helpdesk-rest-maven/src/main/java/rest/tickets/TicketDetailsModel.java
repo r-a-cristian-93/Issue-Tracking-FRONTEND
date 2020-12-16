@@ -20,9 +20,6 @@ import lombok.*;
 @Entity
 @Table(name="tickets")
 @Getter @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class TicketDetailsModel {
 	@Id
 	@GeneratedValue
@@ -42,4 +39,6 @@ public class TicketDetailsModel {
 	private String assignedTo;
 	@Column(name="closed_by")
 	private String closedBy;
+	
+	protected TicketDetailsModel() {}
 }

@@ -8,7 +8,6 @@ import lombok.*;
 @Entity
 @Table(name = "users")
 @Getter @Setter
-
 public class AdminModel{
 	@Id
 	private Long id;

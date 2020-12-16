@@ -7,7 +7,7 @@ public class TicketFilterBean {
 	
 	public TicketFilterBean() {}
 		
-	public TicketFilterBean setTicketId(Integer value) {
+	public TicketFilterBean setId(Integer value) {
 		if (value != null) restraints.put("t.ID", value);
 		return this;
 	}	
