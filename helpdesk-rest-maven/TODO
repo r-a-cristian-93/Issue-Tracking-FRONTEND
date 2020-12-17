@@ -6,7 +6,7 @@ CountTicketsController.java
 DeleteTicketController.java
 GetTicketController.java	
 ManageTicketsController.java
-NewTicketController.java
+
 ReviewTicketsController.java
 SuperTicketsController.java
 
@@ -23,4 +23,5 @@ ListRolesController.java			ok		/options/get/roles
 ListStatusController.java			ok		/options/get/status
 
 =====tickets=====
-MyTicketsController.java			ok		/tickets/get/filter?
+MyTicketsController.java			ok		/tickets/filter?
+NewTicketController.java			ok 		/tickets/insert?
