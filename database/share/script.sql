@@ -150,7 +150,7 @@ CREATE TABLE `users` (
   `email` varchar(150) NOT NULL,
   `department` varchar(50) NOT NULL,
   `role` varchar(50) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
   UNIQUE KEY `email` (`email`),
