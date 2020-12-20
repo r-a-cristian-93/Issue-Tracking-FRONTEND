@@ -13,6 +13,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.context.annotation.Bean;
 
+import static rest.ApplicationConstants.*;
+
 
 
 @EnableWebSecurity
@@ -30,12 +32,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.cors().and().csrf().disable().authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/options/roles").permitAll()
 				.antMatchers(HttpMethod.POST, "/usermanagement/register").permitAll()
+				.antMatchers(HttpMethod.POST, "/sad").permitAll()
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginProcessingUrl("/login")
-				.usernameParameter("username")
-				.passwordParameter("password")
+				.usernameParameter(LOGIN_PARAM_USERNAME)
+				.passwordParameter(LOGIN_PARAM_PASSWORD)
 				.and()
 				.addFilter(new AuthenticationFilter(authenticationManager()))
 				.addFilter(new AuthorizationFilter(authenticationManager()))

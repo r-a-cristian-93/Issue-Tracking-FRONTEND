@@ -6,6 +6,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.*;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,7 +22,13 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import rest.db.models.UserModel;
-
+import static rest.ApplicationConstants.*;
+/*
+import static rest.ApplicationConstants.LOGIN_PARAM_USERNAME;
+import static rest.ApplicationConstants.LOGIN_PARAM_PASSWORD;
+import static rest.ApplicationConstants.LOGIN_PARAM_NOK_URL;
+import static rest.ApplicationConstants.LOGIN_PARAM_OK_URL;
+*/
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authManager;
 
@@ -33,16 +40,12 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	public Authentication attemptAuthentication(
 		HttpServletRequest request, 
 		HttpServletResponse response) throws AuthenticationException {
-			
-		System.out.println("======================Authentication.attemptAuthentication " + request.getRequestURL());
 		
 		try {
-			UserModel credentials = UserModel.getInstance();
-			System.out.println("======================" + "Attempting with " + request.getParameter("username") + " / " + request.getParameter("password"));
-			credentials.setEmail(request.getParameter("username"));
-			credentials.setPassword(request.getParameter("password"));
-			System.out.println("======================" + "Attempting with " + credentials.getEmail() + " / " + credentials.getPassword());
-			
+			UserModel credentials = UserModel.getInstance();			
+			credentials.setEmail(request.getParameter(LOGIN_PARAM_USERNAME));
+			credentials.setPassword(request.getParameter(LOGIN_PARAM_PASSWORD));
+						
 			return authManager
 				.authenticate(
 					new UsernamePasswordAuthenticationToken(
@@ -61,42 +64,37 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		HttpServletResponse response, 
 		FilterChain filterChain, 
 		Authentication auth) {
-			
-			System.out.println("======================Authentication.succesfull" + request.getRequestURL());
 			try {
 				String email = ((User) auth.getPrincipal()).getUsername();			
-				String key = "secret";
-				String issuer = "helpdesk";
-				String redirUrl = request.getParameter("okUrl");
-				System.out.println("======================Authentication.succesfull URL" + request.getParameter("okUrl"));
-
+				String redirUrl = request.getParameter(LOGIN_PARAM_OK_URL);
 				String token = JWT.create()
-					.withIssuer(issuer)
-					.withClaim("userEmail", email)
+					.withIssuer(JWT_ISSUER)
+					.withClaim(JWT_COOKIE_CLAIM_EMAIL, email)
 					.withIssuedAt(new Date(System.currentTimeMillis()))
-					.withExpiresAt(new Date(System.currentTimeMillis() + 3600000))  //+one hour
-					.sign(Algorithm.HMAC256(key));
-					
-				Cookie jwtCookie= new Cookie("JWT", token);
+					.withExpiresAt(new Date(System.currentTimeMillis() + JWT_AGE*60000))
+					.sign(Algorithm.HMAC256(JWT_KEY));					
+				Cookie jwtCookie= new Cookie(JWT_COOKIE_NAME, token);
 				jwtCookie.setSecure(true);
 				jwtCookie.setPath("/");
-				jwtCookie.setMaxAge(60*60*1);
-				
+				jwtCookie.setMaxAge(JWT_AGE*60);
+								
 				response.addCookie(jwtCookie);
 				response.sendRedirect(request.getContextPath() + redirUrl);
 			}
 			catch (Exception e) {}
 	}
-/*	
+	
 	@Override
 	protected void unsuccessfulAuthentication(
 		HttpServletRequest request, 
 		HttpServletResponse response, 
-		AuthenticationException failed) {			
-			String redirUrl = request.getParameter("nokUrl");
-			response.sendRedirect(request.getContextPath() + redirUrl);
-	}
-	*/		
+		AuthenticationException failed) {
+			try {			
+				String redirUrl = request.getParameter(LOGIN_PARAM_NOK_URL);
+				response.sendRedirect(request.getContextPath() + redirUrl);
+			}
+			catch (Exception e) {}
+	}	
 }
 	
 	

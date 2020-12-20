@@ -1,12 +1,8 @@
 Endpoints to implement
 
-
 CountTicketsController.java
-
-
 NavigationController.java
-RegisterController.java
-LoginController.java
+
 
 
 ======options======
@@ -17,13 +13,24 @@ ListRolesController.java			ok		/options/get/roles
 ListStatusController.java			ok		/options/get/status
 
 =====tickets=====
-ManageTicketsController.java		ok
-ReviewTicketsController.java		ok
-SuperTicketsController.java			ok
-GetTicketController.java			ok
-MyTicketsController.java			ok		/tickets/filter?
+ManageTicketsController.java		
+ReviewTicketsController.java		
+SuperTicketsController.java			
+GetTicketController.java			
+MyTicketsController.java			nok		/tickets/filter?
 NewTicketController.java			ok 		/tickets/insert?
 AssignTicketController.java			ok		/tickets/assign?ticketId&assignTo
 CloseTicketController.java			ok		/tickets/close?ticketId
 DeleteTicketController.java			ok		/tickets/delete?ticketId
 	
+========log in=======
+LoginController.java				ok		Spring security
+	
+===user management===
+RegisterController.java				ok		/usermanagemet/register
+
+
+
+
+
+

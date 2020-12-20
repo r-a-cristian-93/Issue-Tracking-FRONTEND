@@ -19,5 +19,3 @@ public class Application extends SpringBootServletInitializer{
 		return new BCryptPasswordEncoder();
 	}
 }
-
-

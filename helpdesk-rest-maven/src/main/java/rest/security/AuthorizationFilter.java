@@ -20,6 +20,9 @@ import javax.servlet.http.Cookie;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static rest.ApplicationConstants.*;
+
+
 public class AuthorizationFilter extends BasicAuthenticationFilter {
 
 	public AuthorizationFilter(AuthenticationManager authManager) {
@@ -37,7 +40,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			Cookie cookies[] = req.getCookies();
 			Cookie jwtCookie = null;
 			for(int i=0; i<cookies.length; i++) {
-				if(cookies[i].getName().equals("JWT"));
+				if(cookies[i].getName().equals(JWT_COOKIE_NAME));
 				jwtCookie = cookies[i];
 			}
 			
@@ -61,7 +64,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			Cookie cookies[] = request.getCookies();
 			String token = null;
 			for(int i=0; i<cookies.length; i++) {
-				if(cookies[i].getName().equals("JWT")) {
+				if(cookies[i].getName().equals(JWT_COOKIE_NAME)) {
 					token = cookies[i].getValue();
 				}
 			}
@@ -86,10 +89,8 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		System.out.println("===================Authorization.verify" + token);
 		String user = null;
 		try {
-			String key = "secret";
-			String issuer = "helpdesk";
-			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(key))
-				.withIssuer(issuer)
+			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JWT_KEY))
+				.withIssuer(JWT_ISSUER)
 				.build();
 			DecodedJWT jwt = verifier.verify(token);
 			user = jwt.getToken();
