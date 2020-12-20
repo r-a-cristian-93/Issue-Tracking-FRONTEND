@@ -9,4 +9,5 @@ import rest.db.projections.*;
 public interface UsersRepository extends JpaRepository<UserModel, Integer> {
 	List<UserIdEmailProjection> findByRole(RoleModel role);
 	List<UserIdEmailProjection> findByRoleAndDepartment(RoleModel role, DepartmentModel department);
+	UserModel findByEmail(String email);
 }

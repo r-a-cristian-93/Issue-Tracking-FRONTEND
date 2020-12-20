@@ -36,22 +36,8 @@ public class UserModel{
 	private RoleModel role;
 	
 	protected UserModel() {};
+	
+	public static UserModel getInstance() {
+		return new UserModel();
+	}
 }
-/*
-
-| users | CREATE TABLE `users` (
-  `ID` int NOT NULL AUTO_INCREMENT,
-  `email` varchar(150) NOT NULL,
-  `department` varchar(50) NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `ID` (`ID`),
-  UNIQUE KEY `email` (`email`),
-  KEY `department` (`department`),
-  KEY `role` (`role`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`department`) REFERENCES `departments` (`value`),
-  CONSTRAINT `users_ibfk_2` FOREIGN KEY (`role`) REFERENCES `roles` (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci |
-* 
-* */
