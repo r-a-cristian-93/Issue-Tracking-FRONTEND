@@ -1,15 +1,13 @@
 package rest.security;
 
-import com.auth0.jwt.*;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.*;
-import com.auth0.jwt.interfaces.*;
+import com.auth0.jwt.interfaces.DecodedJWT;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -18,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 
 import static rest.ApplicationConstants.*;
 
@@ -35,69 +33,43 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		HttpServletResponse res,
 		FilterChain chain) throws IOException, ServletException {
 			
-		System.out.println("===================Authorization.doFilterInternal");
-		try {	
-			Cookie cookies[] = req.getCookies();
-			Cookie jwtCookie = null;
-			for(int i=0; i<cookies.length; i++) {
-				if(cookies[i].getName().equals(JWT_COOKIE_NAME));
-				jwtCookie = cookies[i];
-			}
+		String jwtToken = getToken(req);
 			
-			//if has no cookie forward request
-			if (jwtCookie == null) {
-				chain.doFilter(req, res);
-				return;
-			}
-		}
-		catch (Exception e) {}
-			
-			//else process authentication
-			UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-			SecurityContextHolder.getContext().setAuthentication(authentication);
+		//if has no cookie forward request and don't authenticate
+		if (jwtToken == null) {
 			chain.doFilter(req, res);
-	}
-
-	private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-		System.out.println("===================Authorization.getAuthentication");
-		try {
-			Cookie cookies[] = request.getCookies();
-			String token = null;
-			for(int i=0; i<cookies.length; i++) {
-				if(cookies[i].getName().equals(JWT_COOKIE_NAME)) {
-					token = cookies[i].getValue();
-				}
-			}
-			
-			if (token != null) {
-				String user = verify(token);
-
-				if (user != null) {
-					return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-				}
-				return null;
-			}
-			
+			return;
 		}
-		catch (Exception e) {}
-		return null;
-	}
-
-
-	private String verify(String token) {
 		
-		System.out.println("===================Authorization.verify" + token);
-		String user = null;
-		try {
-			JWTVerifier verifier = JWT.require(Algorithm.HMAC256(JWT_KEY))
-				.withIssuer(JWT_ISSUER)
-				.build();
-			DecodedJWT jwt = verifier.verify(token);
-			user = jwt.getToken();
-		} 
-		catch (Exception e){
-			e.printStackTrace();			
-		}
-		return user;
+		//else process authentication and forward request
+		UsernamePasswordAuthenticationToken authentication = getAuthentication(jwtToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		chain.doFilter(req, res);
+	}
+	
+	private String getToken(HttpServletRequest request){
+		Cookie cookies[] = request.getCookies();
+		for(Cookie c:cookies) {
+			if(c.getName().equals(JWT_COOKIE_NAME)) {
+				return c.getValue();
+			}
+		}	
+		return null;
+	}		
+
+	private UsernamePasswordAuthenticationToken getAuthentication(String jwtToken) {
+		DecodedJWT jwt = JWT.require(Algorithm.HMAC256(JWT_KEY))
+			.withIssuer(JWT_ISSUER)
+			.build()
+			.verify(jwtToken);
+		String user = jwt
+			.getClaim(JWT_COOKIE_CLAIM_EMAIL)
+			.asString();
+		List<SimpleGrantedAuthority> roles = jwt
+			.getClaim(JWT_COOKIE_CLAIM_ROLES)
+			.asList(SimpleGrantedAuthority.class);
+
+		System.out.println("decoded: " + user + " roles:  " + roles);
+		return new UsernamePasswordAuthenticationToken(user, null, roles);
 	}
 }

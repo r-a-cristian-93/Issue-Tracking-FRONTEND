@@ -7,6 +7,7 @@ public class ApplicationConstants {
 	public static final String LOGIN_PARAM_NOK_URL = "nokUrl";
 	public static final String JWT_COOKIE_NAME = "JWT";
 	public static final String JWT_COOKIE_CLAIM_EMAIL = "email";
+	public static final String JWT_COOKIE_CLAIM_ROLES = "roles";
 	public static final String JWT_ISSUER = "helpdesk";
 	public static final String JWT_KEY = "SecretKeyToGenJWTs";
 

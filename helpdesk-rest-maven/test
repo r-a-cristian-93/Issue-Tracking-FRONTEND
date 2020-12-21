@@ -1,1 +1,1 @@
-mvn clean package && cp target/helpdesk-rest-0.0.1-SNAPSHOT.war ../tomcat/webapps/rest.war && docker start -i hd_tomcat
+mvn clean spring-boot:run -Dspring-boot.run.profiles=dev

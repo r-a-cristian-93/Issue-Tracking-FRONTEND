@@ -1,34 +1,31 @@
 package rest.security;
 
-import com.auth0.jwt.*;
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.*;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Cookie;
-import java.util.ArrayList;
-import java.util.Date;
+import javax.servlet.ServletException;
+import java.util.*;
+import java.util.stream.*;
+import java.io.*;
 
 import rest.db.models.UserModel;
 import static rest.ApplicationConstants.*;
-/*
-import static rest.ApplicationConstants.LOGIN_PARAM_USERNAME;
-import static rest.ApplicationConstants.LOGIN_PARAM_PASSWORD;
-import static rest.ApplicationConstants.LOGIN_PARAM_NOK_URL;
-import static rest.ApplicationConstants.LOGIN_PARAM_OK_URL;
-*/
+
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authManager;
 
@@ -41,21 +38,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		HttpServletRequest request, 
 		HttpServletResponse response) throws AuthenticationException {
 		
-		try {
-			UserModel credentials = UserModel.getInstance();			
-			credentials.setEmail(request.getParameter(LOGIN_PARAM_USERNAME));
-			credentials.setPassword(request.getParameter(LOGIN_PARAM_PASSWORD));
-						
-			return authManager
-				.authenticate(
-					new UsernamePasswordAuthenticationToken(
-						credentials.getEmail(), 
-						credentials.getPassword(),
-						new ArrayList<>()));
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		UserModel credentials = UserModel.getInstance();			
+		credentials.setEmail(request.getParameter(LOGIN_PARAM_USERNAME));
+		credentials.setPassword(request.getParameter(LOGIN_PARAM_PASSWORD));
+					
+		return authManager
+			.authenticate(
+				new UsernamePasswordAuthenticationToken(
+					credentials.getEmail(), 
+					credentials.getPassword(),
+					new ArrayList<>()));
 	}
 	
 	@Override
@@ -65,11 +57,17 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		FilterChain filterChain, 
 		Authentication auth) {
 			try {
-				String email = ((User) auth.getPrincipal()).getUsername();			
-				String redirUrl = request.getParameter(LOGIN_PARAM_OK_URL);
+				//this auth object comes from UserDetailsServiceImpl
+				String email = ((User) auth.getPrincipal()).getUsername();	
+				List<String> roles = ((User) auth.getPrincipal()).getAuthorities()
+					.stream()
+					.map(a -> a.getAuthority())
+					.collect(Collectors.toList());
+				System.out.println(" successfulAuthentication roles " + roles);
 				String token = JWT.create()
 					.withIssuer(JWT_ISSUER)
 					.withClaim(JWT_COOKIE_CLAIM_EMAIL, email)
+					.withClaim(JWT_COOKIE_CLAIM_ROLES, roles)
 					.withIssuedAt(new Date(System.currentTimeMillis()))
 					.withExpiresAt(new Date(System.currentTimeMillis() + JWT_AGE*60000))
 					.sign(Algorithm.HMAC256(JWT_KEY));					
@@ -79,24 +77,21 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 				jwtCookie.setMaxAge(JWT_AGE*60);
 								
 				response.addCookie(jwtCookie);
-				response.sendRedirect(request.getContextPath() + redirUrl);
+				String targetUrl = request.getParameter(LOGIN_PARAM_OK_URL);
+				new DefaultRedirectStrategy().sendRedirect(request, response, targetUrl);
 			}
-			catch (Exception e) {}
+			catch (Exception e) { 
+				e.printStackTrace();
+			}
 	}
 	
 	@Override
 	protected void unsuccessfulAuthentication(
 		HttpServletRequest request, 
 		HttpServletResponse response, 
-		AuthenticationException failed) {
-			try {			
-				String redirUrl = request.getParameter(LOGIN_PARAM_NOK_URL);
-				response.sendRedirect(request.getContextPath() + redirUrl);
-			}
-			catch (Exception e) {}
+		AuthenticationException failed) throws IOException, ServletException {
+			
+		String targetUrl = request.getParameter(LOGIN_PARAM_NOK_URL);
+		new DefaultRedirectStrategy().sendRedirect(request, response, targetUrl);			
 	}	
 }
-	
-	
-		
-		

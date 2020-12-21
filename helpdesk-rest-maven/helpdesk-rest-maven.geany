@@ -28,17 +28,11 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=9
-FILE_NAME_0=426;None;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2FTODO;0;4
-FILE_NAME_1=465;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fcontrollers%2FTicketsController.java;0;4
-FILE_NAME_2=792;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fmodels%2FTicketModel.java;0;4
-FILE_NAME_3=378;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fprojections%2FTicketDetailsProjection.java;0;4
-FILE_NAME_4=493;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Frepositories%2FTicketsRepository.java;0;4
-FILE_NAME_5=0;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fprojections%2FUserIdEmailProjection.java;0;4
-FILE_NAME_6=457;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Frepositories%2FUsersRepository.java;0;4
-FILE_NAME_7=2221;XML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fpom.xml;0;4
-FILE_NAME_8=1026;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fmodels%2FUserModel.java;0;4
-FILE_NAME_9=2885;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FAuthenticationFilter.java;0;4
+current_page=3
+FILE_NAME_0=530;None;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2FTODO;0;4
+FILE_NAME_1=2890;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FAuthenticationFilter.java;0;4
+FILE_NAME_2=2318;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FAuthorizationFilter.java;0;4
+FILE_NAME_3=452;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FUserDetailsServiceImpl.java;0;4
 
 [VTE]
 last_dir=/home/taifun/NetBeansProjects/Manual
