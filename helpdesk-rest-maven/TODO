@@ -16,8 +16,8 @@ ListStatusController.java			ok		/options/get/status
 ManageTicketsController.java		
 ReviewTicketsController.java		
 SuperTicketsController.java			
-GetTicketController.java			
-MyTicketsController.java			nok		/tickets/filter?
+GetTicketController.java					reimplemented in ticket updates			
+MyTicketsController.java			ok		/tickets/mytickets?
 NewTicketController.java			ok 		/tickets/insert?
 AssignTicketController.java			ok		/tickets/assign?ticketId&assignTo
 CloseTicketController.java			ok		/tickets/close?ticketId

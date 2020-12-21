@@ -10,4 +10,8 @@ public interface TicketsRepository extends JpaRepository<TicketModel, Integer> {
 	List findByStatus(StatusModel status);
 	List findByConcernedDepartment(DepartmentModel department);
 	List findByStatusAndConcernedDepartment(StatusModel status, DepartmentModel department);
+	
+	List<TicketDetailsProjection> findByOpenedBy(UserModel openedBy);
+	List<TicketDetailsProjection> findByOpenedByAndStatus(UserModel openedBy, StatusModel status);
+	
 }

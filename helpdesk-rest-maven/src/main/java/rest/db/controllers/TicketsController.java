@@ -1,8 +1,11 @@
 package rest.db.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.*;
@@ -13,7 +16,7 @@ import rest.db.repositories.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("ticket")
+@RequestMapping("tickets")
 public class TicketsController {
 	private final EntityManager entityManager;
 	private final TicketsRepository ticketsRepo;
@@ -22,24 +25,16 @@ public class TicketsController {
 	private final StatusRepository statusRepo;
 	
 	@ResponseBody
-	@GetMapping("/find")
-	public List<TicketDetailsProjection> find(Integer id, String status, String department) {
-		if (status!=null && department==null) {	
+	@GetMapping("/mytickets") 
+	public List<TicketDetailsProjection> getMyTickets(String status) {		
+		UserModel userModel = getUserFromContext();
+		if(status!=null) {
 			StatusModel statusModel = StatusModel.getInstance(status);
-			return ticketsRepo.findByStatus(statusModel);
-		}			
-		if (status==null && department!=null) {
-			DepartmentModel departmentModel = DepartmentModel.getInstance(department);
-			return ticketsRepo.findByConcernedDepartment(departmentModel);
-		}
-		if (status!=null && department!=null) {
-			StatusModel statusModel = StatusModel.getInstance(status);
-			DepartmentModel departmentModel = DepartmentModel.getInstance(department);
-			return ticketsRepo.findByStatusAndConcernedDepartment(statusModel, departmentModel);
-		}			
-		return ticketsRepo.findById(id, TicketDetailsProjection.class);
-	}	
-	
+			return ticketsRepo.findByOpenedByAndStatus(userModel, statusModel);
+		} 
+		else return ticketsRepo.findByOpenedBy(userModel);
+	}
+		
 	@ResponseBody
 	@PostMapping("/add")
 	public void insertTicket(
@@ -47,8 +42,7 @@ public class TicketsController {
 				@RequestParam String issue,
 				@RequestParam String concernedDepartment) {		
 		DepartmentModel department = departmentsRepo.findByValue(concernedDepartment);
-		//get openedBy from User bean from JWT
-		UserModel openedBy = usersRepo.getOne(1);
+		UserModel openedBy = getUserFromContext();
 		TicketModel ticket = TicketModel.getInstance();
 		ticket.setOpenedBy(openedBy);
 		ticket.setSummary(summary);
@@ -59,18 +53,19 @@ public class TicketsController {
 	
 	@ResponseBody
 	@PutMapping("/{id}/update")
-	public void assignTo(
+	public TicketDetailsProjection assignTo(
 				@PathVariable Integer id,
 				@RequestParam Integer assignTo) {
 		UserModel admin = usersRepo.getOne(assignTo);
 		TicketModel ticket = ticketsRepo.getOne(id);
 		ticket.setAssignedTo(admin);
 		ticketsRepo.save(ticket);
+		return ticketsRepo.findById(id, TicketDetailsProjection.class).get(0);
 	}
 	
 	@ResponseBody
 	@PutMapping("/{id}/close")
-	public void closeTicket(
+	public TicketDetailsProjection closeTicket(
 				@PathVariable Integer id,
 				@RequestParam String status) {
 		//get closedBy from User bean from JWT
@@ -80,6 +75,7 @@ public class TicketsController {
 		ticket.setClosedBy(closedBy);
 		ticket.setStatus(statusModel);
 		ticketsRepo.save(ticket);
+		return ticketsRepo.findById(id, TicketDetailsProjection.class).get(0);
 	}
 	
 	@ResponseBody
@@ -88,4 +84,11 @@ public class TicketsController {
 		TicketModel ticket = ticketsRepo.getOne(id);
 		ticketsRepo.delete(ticket);
 	}	
+
+
+
+	private UserModel getUserFromContext() {
+		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return usersRepo.findByEmail(email);
+	}
 }

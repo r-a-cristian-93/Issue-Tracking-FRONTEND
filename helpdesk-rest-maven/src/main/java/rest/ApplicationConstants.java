@@ -11,6 +11,6 @@ public class ApplicationConstants {
 	public static final String JWT_ISSUER = "helpdesk";
 	public static final String JWT_KEY = "SecretKeyToGenJWTs";
 
-	public static final int JWT_AGE = 10; // minutes
+	public static final int JWT_AGE = 120; // minutes
 	
 }

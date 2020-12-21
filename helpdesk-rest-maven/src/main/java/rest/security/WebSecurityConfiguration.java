@@ -30,9 +30,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
 			.authorizeRequests()
-				.antMatchers(HttpMethod.GET, "/options/roles").hasAuthority("admin")
-				.antMatchers(HttpMethod.GET, "/options/departments").permitAll()
-				.antMatchers(HttpMethod.POST, "/usermanagement/register").permitAll()
+				.antMatchers(HttpMethod.POST, "/tickets/add").permitAll()
+				.antMatchers(HttpMethod.DELETE, "/tickets/{id}/delete").hasAuthority("owner")
+				.antMatchers(HttpMethod.PUT, "/tickets/{id}/close").hasAnyAuthority("admin", "moderator", "owner")
+				.antMatchers(HttpMethod.PUT, "/tickets/{id}/update").hasAnyAuthority("moderator", "owner")
+				.antMatchers(HttpMethod.GET, "/tickets/mytickets").permitAll()
+				.antMatchers(HttpMethod.GET, "/options*").permitAll()
+				.antMatchers(HttpMethod.POST, "/usermanagement/register").hasAuthority("owner")
 				.anyRequest().authenticated()
 			.and()
 			.formLogin()
@@ -50,5 +54,5 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth
 			.userDetailsService(userDetailsService)
 			.passwordEncoder(bCryptPasswordEncoder);
-	}	
+	}
 }
