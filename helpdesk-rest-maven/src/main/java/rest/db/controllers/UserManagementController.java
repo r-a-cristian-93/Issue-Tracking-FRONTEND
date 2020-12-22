@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import rest.db.models.*;
 import rest.db.repositories.*;
 import rest.db.projections.*;
@@ -14,6 +15,7 @@ import lombok.*;
 @Controller
 @AllArgsConstructor
 @RequestMapping("usermanagement")
+@PreAuthorize("hasAuthority(T(rest.ApplicationConstants).ROLE_OWNER)")
 public class UserManagementController {
 	private UsersRepository usersRepo;		
 	private BCryptPasswordEncoder pwdEncoder;

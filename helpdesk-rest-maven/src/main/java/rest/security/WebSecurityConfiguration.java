@@ -2,7 +2,9 @@ package rest.security;
 
 import org.springframework.http.HttpMethod;
 
+
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -16,7 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import static rest.ApplicationConstants.*;
 
 @Configuration
-@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	private UserDetailsService userDetailsService;
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -29,14 +31,14 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-			.authorizeRequests()
+			.authorizeRequests() /*
 				.antMatchers(HttpMethod.POST, "/tickets/add").permitAll()
-				.antMatchers(HttpMethod.DELETE, "/tickets/{id}/delete").hasAuthority("owner")
-				.antMatchers(HttpMethod.PUT, "/tickets/{id}/close").hasAnyAuthority("admin", "moderator", "owner")
-				.antMatchers(HttpMethod.PUT, "/tickets/{id}/update").hasAnyAuthority("moderator", "owner")
+				.antMatchers(HttpMethod.DELETE, "/tickets/{id}/delete").hasAuthority(ROLE_OWNER)
+				.antMatchers(HttpMethod.PUT, "/tickets/{id}/close").hasAnyAuthority(ROLE_ADMIN, ROLE_MODERATOR, ROLE_OWNER)
+				.antMatchers(HttpMethod.PUT, "/tickets/{id}/update").hasAnyAuthority(ROLE_MODERATOR, ROLE_OWNER)
 				.antMatchers(HttpMethod.GET, "/tickets/mytickets").permitAll()
 				.antMatchers(HttpMethod.GET, "/options*").permitAll()
-				.antMatchers(HttpMethod.POST, "/usermanagement/register").hasAuthority("owner")
+				.antMatchers(HttpMethod.POST, "/usermanagement/register").hasAuthority(ROLE_OWNER) */
 				.anyRequest().authenticated()
 			.and()
 			.formLogin()

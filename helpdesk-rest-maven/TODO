@@ -1,8 +1,5 @@
 Endpoints to implement
-
-CountTicketsController.java
 NavigationController.java
-
 
 
 ======options======
@@ -13,9 +10,9 @@ ListRolesController.java			ok		/options/get/roles
 ListStatusController.java			ok		/options/get/status
 
 =====tickets=====
-ManageTicketsController.java		
-ReviewTicketsController.java		
-SuperTicketsController.java			
+ManageTicketsController.java		ok		/tickets/manage		moderator - concernedDepartment     status openedByDepartment
+ReviewTicketsController.java		ok		/tickets/manage		admin - assignedTo      status openedByDepartment
+SuperTicketsController.java			ok		/tickets/manage		owner					status openedByDepartment
 GetTicketController.java					reimplemented in ticket updates			
 MyTicketsController.java			ok		/tickets/mytickets?
 NewTicketController.java			ok 		/tickets/insert?
@@ -30,7 +27,7 @@ LoginController.java				ok		Spring security
 RegisterController.java				ok		/usermanagemet/register
 
 
-
+CountTicketsController.java			ok		/tickets/count
 
 
 

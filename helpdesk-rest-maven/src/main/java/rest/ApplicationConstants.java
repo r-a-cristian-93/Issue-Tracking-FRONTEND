@@ -10,6 +10,11 @@ public class ApplicationConstants {
 	public static final String JWT_COOKIE_CLAIM_ROLES = "roles";
 	public static final String JWT_ISSUER = "helpdesk";
 	public static final String JWT_KEY = "SecretKeyToGenJWTs";
+	public static final String ROLE_USER = "User";
+	public static final String ROLE_ADMIN = "Admin";
+	public static final String ROLE_MODERATOR = "Moderator";
+	public static final String ROLE_OWNER = "Owner";
+	
 
 	public static final int JWT_AGE = 120; // minutes
 	

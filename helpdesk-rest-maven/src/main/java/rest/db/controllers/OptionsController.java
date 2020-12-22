@@ -9,6 +9,8 @@ import rest.db.repositories.*;
 import rest.db.projections.*;
 import java.util.*;
 
+import static rest.ApplicationConstants.*;
+
 @Controller
 @RequestMapping("options")
 public class OptionsController {

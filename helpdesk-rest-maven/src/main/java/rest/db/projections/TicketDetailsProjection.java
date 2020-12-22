@@ -12,4 +12,8 @@ public interface TicketDetailsProjection {
 	UserIdEmailProjection getOpenedBy();
 	UserIdEmailProjection getAssignedTo();
 	UserIdEmailProjection getClosedBy();	
+	
+	default DepartmentModel getOpenedByDepartment() {
+		return getOpenedBy().getDepartment();
+	}
 }
