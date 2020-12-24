@@ -9,7 +9,7 @@ import rest.db.projections.*;
 public interface TicketsRepository extends JpaRepository<TicketModel, Integer> {
 	<T> List<T> findById(Integer id, Class<T> type);
 	
-	@Query(value = "SELECT status, COUNT(*) count from tickets WHERE opened_by=?1 GROUP BY status;", nativeQuery=true)
+	@Query(value = "SELECT status, COUNT(*) count from tickets WHERE opened_by=?1 GROUP BY status ORDER BY status ASC;", nativeQuery=true)
 	List<TicketCountProjection> countTickets(Integer openedBy);
 
 	List<TicketDetailsProjection> findByOpenedBy(UserModel openedBy);

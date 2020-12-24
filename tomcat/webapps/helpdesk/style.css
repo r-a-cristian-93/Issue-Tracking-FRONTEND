@@ -318,6 +318,10 @@ textarea {
 	margin:5px;
 	filter: invert(1);
 	}
+	
+.hidden {
+	display:none;
+	}
 
 @media only screen and (max-width: 800px) {
 	#menu, #welcome-user {

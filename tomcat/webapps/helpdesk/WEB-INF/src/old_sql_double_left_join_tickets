@@ -1,9 +1,0 @@
-		/*String sql = "SELECT x.ID, x.status, x.issue, x.opened_by, users.email AS assigned_to "+
-						"FROM (SELECT tickets.ID, tickets.status, tickets.issue, users.email AS opened_by, tickets.closed_by "+
-									"FROM tickets "+
-									"LEFT JOIN users "+
-									"ON tickets.opened_by=users.ID "+
-									"WHERE users.ID="+userId+") AS x "+
-						"LEFT JOIN users "+
-						"ON x.assigned_to=users.ID;";
-						*/

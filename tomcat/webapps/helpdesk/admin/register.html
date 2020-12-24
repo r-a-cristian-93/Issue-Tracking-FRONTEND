@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Help Desk - New Ticket Created</title>
+		<title>Help Desk - Register</title>
 		<link rel="stylesheet" href="../style.css">
 		<script src="../jquery-3.5.1.js"></script>
 		<script src="../user/utility.js"></script>
 		<script src="../user/navigation.js"></script>
+		<script src="register.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 		<meta charset="UTF-8">
 	</head>
@@ -32,18 +33,33 @@
 				</span>
 			</div>
 			<span class="menu-title">Navigation Menu</span>
-		</div>	
+		</div>		
 		<div id="content">
-			<h1>New Ticket Created</h1><h4></h4>
-			<div id="newticket" class="simple-box">
-				<div class="simple-box-title">
-					<img class="box-icon" src="../icons/New Ticket.png">New Ticket
-				</div>
+			<h1>Register</h1><h4>Fill in this form to create a new user</h4>
+			<div id="register" class="simple-box">
+				<div class="simple-box-title"><img src="../icons/Register.png" class="box-icon">Register new user</div>
 				<div class="simple-box-content">
-					A new ticket was successfully created. You will be informed about the progress via email.
+					<form name="register">
+						<label class="big-form">Email</label>
+						<input id="email" type="text" class="big-form space-bottom" placeholder="Enter email address" required/>
+						<label class="big-form">Password</label>
+						<input id="password" type="password" class="big-form space-bottom" placeholder="Enter a password" required/>
+						<label class="big-form">Department</label>
+						<select class="big-form space-bottom" id="department" name="department" required></select>
+						<label class="big-form">Role</label>
+						<select class="big-form space-bottom" id="role" name="role" required></select>
+						<button id="form-register-submit" type="button" class="button big-form">Register</button>
+					</form>
 				</div>
 			</div>
 		</div>
 		<div id="footer"> HelpDesk System © 2021 HelpDesk System </div>
 	</body>
 </html>
+
+
+
+
+
+
+

@@ -75,10 +75,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 				jwtCookie.setSecure(true);
 				jwtCookie.setPath("/");
 				jwtCookie.setMaxAge(JWT_AGE*60);
-								
+				System.out.println("LOGIN OK");	
 				response.addCookie(jwtCookie);
-				String targetUrl = request.getParameter(LOGIN_PARAM_OK_URL);
-				new DefaultRedirectStrategy().sendRedirect(request, response, targetUrl);
+				
 			}
 			catch (Exception e) { 
 				e.printStackTrace();
@@ -90,8 +89,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 		HttpServletRequest request, 
 		HttpServletResponse response, 
 		AuthenticationException failed) throws IOException, ServletException {
-			
-		String targetUrl = request.getParameter(LOGIN_PARAM_NOK_URL);
-		new DefaultRedirectStrategy().sendRedirect(request, response, targetUrl);			
-	}	
+		System.out.println("LOGIN FAILED");
+		response.setStatus(401);		
+	}
 }

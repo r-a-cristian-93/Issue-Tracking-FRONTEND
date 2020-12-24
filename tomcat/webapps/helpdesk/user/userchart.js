@@ -9,15 +9,10 @@ function buildChart() {
 	myChart = new Chart(ctx, {
 		type: 'bar',
 		data: {
-			labels: ['Open', 'Pending', 'Solved', 'Unsolved'],
+			labels: [],
 			datasets: [{
-				data: [0, 0, 0, 0],
-				backgroundColor: [
-					'#FFA500',
-					'#5EA1C2',
-					'#008000',
-					'#CE2727'
-				]
+				data: [],
+				backgroundColor: []
 			}]
 		},
 		options: {
@@ -67,12 +62,7 @@ function buildChart() {
 			},
 			plugins: {
 			  datalabels: {
-				color: [
-					'#FFA500',
-					'#5EA1C2',
-					'#008000',
-					'#CE2727'
-				],
+				color: [],
 				anchor: 'end',
 				align: 'top',
 				formatter: Math.round,
@@ -90,24 +80,34 @@ function buildChart() {
 
 
 function getTicketsCount() {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-		if(this.readyState==4 && this.status==200){
-			var c = JSON.parse(this.responseText);
-			if(!c.Open){c.Open=0;}
-			if(!c.Pending){c.Pending=0;}
-			if(!c.Solved){c.Solved=0;}
-			if(!c.Unsolved){c.Unsolved=0;}
-
-			myChart.data.datasets[0].data = [c.Open, c.Pending, c.Solved, c.Unsolved];
+	$.ajax({
+		method: 'get',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },	//takes the cookie
+		url: REST_API+'/tickets/count',
+		success:function(response){
+			var totalCount = 0;
+			for(i=0; i<response.length; i++) {
+				var status = response[i].status;
+				var count = response[i].count;
+				var color;
+				myChart.data.labels[i] = status;
+				myChart.data.datasets[0].data[i] = count;											
+				switch (response[i].status) {
+					case 'Open': color  = '#FFA500'; break;
+					case 'Pending': color = '#5EA1C2'; break;
+					case 'Solved': color = '#008000'; break;
+					case 'Unsolved': color = '#CE2727'; break;
+					default:
+				}
+				myChart.data.datasets[0].backgroundColor[i] = color;
+				myChart.options.plugins.datalabels.color[i] = color;
+				totalCount+=count;
+			}
 			myChart.update();
-			
-			var totalCount = c.Open+c.Pending+c.Solved+c.Unsolved;
 			document.getElementById("totalcount").innerHTML = 'You have a total of '+totalCount+' tickets.';
-		}		
-	}
-	request.open('GET', '/helpdesk/user/counttickets');
-	request.send();
+		}
+	});
 }
 
 

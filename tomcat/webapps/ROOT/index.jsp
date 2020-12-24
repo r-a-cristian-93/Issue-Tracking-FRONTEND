@@ -1,1 +1,1 @@
-<% response.sendRedirect("/helpdesk"); %>
+<% response.sendRedirect("/helpdesk/login.html"); %>

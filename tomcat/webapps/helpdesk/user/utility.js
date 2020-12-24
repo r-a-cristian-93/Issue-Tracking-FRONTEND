@@ -1,26 +1,28 @@
+var REST_API = "http://localhost:8080"
+var CLIENT_URL = "http://localhost/helpdesk"
 
 function getDepartments(parse, select) {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-		if(this.readyState==4 && this.status==200){
-			parse(JSON.parse(this.responseText), select);
+	$.ajax({
+		method: 'GET',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },
+		url: REST_API + '/options/departments',
+		success: function(response) {
+			parse(response, select);
 		}		
-	}
-	//request.open('GET', '/helpdesk/user/listdepartments');
-	request.open('GET', '/helpdesk-rest/options/get/departments');
-	request.send();
+	});
 }
 
 function getRoles(parse, select) {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-		if(this.readyState==4 && this.status==200){
-			parse(JSON.parse(this.responseText), select);
+	$.ajax({
+		method: 'GET',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },
+		url: REST_API + '/options/roles',
+		success: function(response) {
+			parse(response, select);
 		}		
-	}
-	//request.open('GET', '/helpdesk/user/listroles');
-	request.open('GET', '/helpdesk-rest/options/get/roles');
-	request.send();
+	});
 }
 
 function getStatus(parse, select) {
