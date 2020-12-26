@@ -28,15 +28,12 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=7
-FILE_NAME_0=557;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Futility.js;0;4
-FILE_NAME_1=161;HTML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Fnew-ticket.html;0;4
-FILE_NAME_2=78;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Fnewticket.js;0;4
-FILE_NAME_3=2072;HTML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fregister.html;0;4
-FILE_NAME_4=771;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fregister.js;0;4
-FILE_NAME_5=450;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Flogin.js;0;4
-FILE_NAME_6=0;HTML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Flogin.html;0;4
-FILE_NAME_7=270;HTML;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fregister-successful.html;0;4
+current_page=4
+FILE_NAME_0=1403;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fassignmodal.js;0;4
+FILE_NAME_1=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fuser%2Ftickets.js;0;4
+FILE_NAME_2=0;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fmanage-tickets.js;0;4
+FILE_NAME_3=717;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fclosemodal.js;0;4
+FILE_NAME_4=699;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Ftomcat%2Fwebapps%2Fhelpdesk%2Fadmin%2Fdeletemodal.js;0;4
 
 [VTE]
 last_dir=/home/taifun/NetBeansProjects/Manual

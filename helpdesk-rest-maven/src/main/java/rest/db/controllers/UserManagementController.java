@@ -23,14 +23,12 @@ public class UserManagementController {
 	@PostMapping("/register")
 	@PreAuthorize("hasAuthority(T(rest.ApplicationConstants).ROLE_OWNER)")
 	public void registerUser(String username, String password, String department, String role ) {
-		if(username!=null && password!=null && department!=null && role!=null) {
-			UserModel userModel = UserModel.getInstance();
-			userModel.setEmail(username);
-			userModel.setPassword(pwdEncoder.encode(password));
-			userModel.setDepartment(DepartmentModel.getInstance(department));
-			userModel.setRole(RoleModel.getInstance(role));
-			usersRepo.save(userModel);
-		}
+		UserModel userModel = UserModel.getInstance();
+		userModel.setEmail(username);
+		userModel.setPassword(pwdEncoder.encode(password));
+		userModel.setDepartment(DepartmentModel.getInstance(department));
+		userModel.setRole(RoleModel.getInstance(role));
+		usersRepo.save(userModel);
 	}
 	
 	@ResponseBody

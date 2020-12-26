@@ -4,10 +4,22 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function myTickets(status) {
-	var request = new XMLHttpRequest;
-	request.onreadystatechange = onreadyFilterTickets(0);
-	request.open('GET', '/helpdesk/user/my-tickets?status='+status);
-	request.send();
+	var filter = {};
+
+	if(status!='All') {
+		filter['status'] = status;
+	}		
+	
+	$.ajax({
+		method: 'GET',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },
+		data: filter,
+		url: REST_API + '/tickets/mytickets',
+		success: function(response) {
+			onreadyFilterTickets(response, 0);
+		}
+	});
 }
 
 
@@ -39,24 +51,20 @@ function buildSmallBox(status, count) {
 }
 
 function getOverviewCount() {
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function() {
-		if(this.readyState==4 && this.status==200){
-			var c = JSON.parse(this.responseText);
-			if(!c.Open){c.Open=0;}
-			if(!c.Pending){c.Pending=0;}
-			if(!c.Solved){c.Solved=0;}
-			if(!c.Unsolved){c.Unsolved=0;}
-			
-			var totalCount = c.Open+c.Pending+c.Solved+c.Unsolved;
-			
-			document.getElementById('overview').appendChild(buildSmallBox('Open', c.Open));
-			document.getElementById('overview').appendChild(buildSmallBox('Pending', c.Pending));
-			document.getElementById('overview').appendChild(buildSmallBox('Solved', c.Solved));
-			document.getElementById('overview').appendChild(buildSmallBox('Unsolved', c.Unsolved));			
-			document.getElementById('overview').appendChild(buildSmallBox('All', totalCount));			
-		}		
-	}
-	request.open('GET', '/helpdesk/user/counttickets');
-	request.send();
+	$.ajax({
+		method: 'GET',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },
+		url: REST_API + '/tickets/count',
+		success: function(response) {			
+			var totalCount = 0;
+			for(i=0; i<response.length; i++) {
+				var status = response[i].status;
+				var count = response[i].count;										
+				document.getElementById('overview').appendChild(buildSmallBox(status, count));
+				totalCount+=count;
+			}
+			document.getElementById('overview').appendChild(buildSmallBox('All', totalCount));
+		}
+	});
 }

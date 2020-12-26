@@ -28,14 +28,7 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=4
-FILE_NAME_0=2994;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FWebSecurityConfiguration.java;0;4
-FILE_NAME_1=197;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2FApplicationConstants.java;0;4
-FILE_NAME_2=2323;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FAuthorizationFilter.java;0;4
-FILE_NAME_3=990;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fsecurity%2FAuthenticationFilter.java;0;4
-FILE_NAME_4=1601;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fcontrollers%2FUserManagementController.java;0;4
-FILE_NAME_5=779;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fmodels%2FUserModel.java;0;4
-FILE_NAME_6=1011;Java;0;EUTF-8;1;1;0;%2Fhome%2Ftaifun%2FHelpDesk%2Fhelpdesk-rest-maven%2Fsrc%2Fmain%2Fjava%2Frest%2Fdb%2Fcontrollers%2FTicketsController.java;0;4
+current_page=-1
 
 [VTE]
 last_dir=/home/taifun/NetBeansProjects/Manual

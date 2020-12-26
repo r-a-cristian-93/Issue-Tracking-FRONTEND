@@ -2,6 +2,13 @@ document.addEventListener("DOMContentLoaded", function(){
     getMenu();
 })
 
+$(document).ready(function(){
+	$('#button-logout').click(function() {
+		document.cookie = 'JWT=; expires=-1; path=/';
+		window.location = CLIENT_URL;	
+	});
+});
+
 function getMenu() {
 	$.ajax({
 		method: 'GET',
@@ -12,6 +19,7 @@ function getMenu() {
 			document.getElementById('access-level').innerHTML = response.role.toUpperCase();
 			document.getElementById('welcome-user').innerHTML="Hello, " + response.email;
 			document.getElementById('welcome-user').setAttribute('href', '');
+			document.getElementById('button-logout').setAttribute('href', CLIENT_URL);
 			
 			addMenuItem('Dashboard', CLIENT_URL + '/user/dashboard.html');
 			addMenuItem('New Ticket', CLIENT_URL + '/user/new-ticket.html');
@@ -35,6 +43,9 @@ function getMenu() {
 				document.getElementById('menu').appendChild(menuItem);	
 				
 			}			
+		},
+		error: function(request, status, error) {
+			window.location = CLIENT_URL + '/login.html';
 		}
 	});
 }

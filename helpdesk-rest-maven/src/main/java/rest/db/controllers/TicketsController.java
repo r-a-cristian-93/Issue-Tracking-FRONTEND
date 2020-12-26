@@ -96,10 +96,7 @@ public class TicketsController {
 		
 	@ResponseBody
 	@PostMapping("/add")
-	public void insertTicket(
-				@RequestParam String summary,
-				@RequestParam String issue,
-				@RequestParam String concernedDepartment) {		
+	public void insertTicket(String summary, String issue, String concernedDepartment) {
 		DepartmentModel department = departmentsRepo.findByValue(concernedDepartment);
 		UserModel openedBy = getUserFromContext();
 		TicketModel ticket = TicketModel.getInstance();
@@ -117,8 +114,10 @@ public class TicketsController {
 				@PathVariable Integer id,
 				@RequestParam Integer assignTo) {
 		UserModel admin = usersRepo.getOne(assignTo);
+		StatusModel statusModel = StatusModel.getInstance("Pending");
 		TicketModel ticket = ticketsRepo.getOne(id);
 		ticket.setAssignedTo(admin);
+		ticket.setStatus(statusModel);
 		ticketsRepo.save(ticket);
 		return ticketsRepo.findById(id, TicketDetailsProjection.class).get(0);
 	}
@@ -141,12 +140,11 @@ public class TicketsController {
 	
 	@ResponseBody
 	@DeleteMapping("/{id}/delete")
-	@PreAuthorize("hasAuthority(ROLE_OWNER)")
+	@PreAuthorize("hasAuthority(T(rest.ApplicationConstants).ROLE_OWNER)")
 	public void deleteTicket(@PathVariable Integer id) {
 		TicketModel ticket = ticketsRepo.getOne(id);
 		ticketsRepo.delete(ticket);
 	}	
-	
 
 	private UserModel getUserFromContext() {
 		String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

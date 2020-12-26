@@ -4,6 +4,8 @@
 		<title>Log in failed</title>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="style-login.css"/>
+		<script src="jquery-3.5.1.js"></script>
+		<script src="user/utility.js"></script>	
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 	</head>
 	<body class="theme-default">
@@ -13,10 +15,13 @@
 					<div class="simple-box-title">LOG IN FAILED</div>
 					<div class="simple-box-content" style="text-align:center">
 						Wrong email or password.</br></br>			
-						<a href="/helpdesk/login.html">Click here to try again</a>
+						<a>Click here to try again</a>
 					</div>
 				</div>
 			</div>	
 		</div>
+	<script>
+		$('a')[0].setAttribute('href', CLIENT_URL + '/login.html');	
+	</script>	
 	</body>
 </html>

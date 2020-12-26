@@ -12,13 +12,14 @@ function deleteTicket() {
 	var ticketId = document.deleteTicketForm.ticketId.value;
 	
 	var request = new XMLHttpRequest();
+	request.withCredentials = true;
 	request.onreadystatechange = function() {
 		if(this.readyState==4 && this.status==200) {
 			hideDeleteModal();
 			document.getElementById(ticketId).remove();
 		}		
 	}	
-	request.open('GET', '/helpdesk/owner/deleteticket?ticketId='+ticketId);
+	request.open('DELETE', REST_API+'/tickets/'+ticketId+'/delete');
 	request.send();
 }
 

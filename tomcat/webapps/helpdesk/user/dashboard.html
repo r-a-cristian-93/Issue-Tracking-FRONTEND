@@ -4,8 +4,8 @@
 		<title>Help Desk - Dashboard</title>
 		<link rel="stylesheet" href="../style.css">
 		<link rel="stylesheet" href="ticket.css">
-		<script src="utility.js"></script>
 		<script src="../jquery-3.5.1.js"></script>
+		<script src="utility.js"></script>		
 		<script src="../user/navigation.js"></script>
 		<script src="../chartjs/Chart.bundle.js"></script>
 		<script src="../chartjs/chartjs-plugin-datalabels.js"></script>	
@@ -18,8 +18,8 @@
 			<div id="show-menu" onclick="showMenu();"><img src="../icons/burger.png"></div>	
 			<span class="logo-small">HelpDesk.com</span>	
 			<div id="personal-menu">
-				<a href="#home" id="welcome-user"></a>
-				<a href="/helpdesk" class="button" onclick="document.cookie = 'JWT=; expires=-1; path=/';">Log Out</a>
+				<a id="welcome-user"></a>
+				<a id="button-logout" class="button">Log Out</a>
 			</div>
 		</div>		
 		<div id="menu">

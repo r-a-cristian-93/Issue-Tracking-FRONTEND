@@ -106,12 +106,12 @@ DROP TABLE IF EXISTS `tickets`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tickets` (
   `ID` int NOT NULL AUTO_INCREMENT,
-  `issue` varchar(255) DEFAULT NULL,
+  `issue` varchar(255) NOT NULL,
   `opened_by` int NOT NULL,
   `closed_by` int DEFAULT NULL,
   `assigned_to` int DEFAULT NULL,
   `status` varchar(50) DEFAULT 'Open',
-  `concerned_department` varchar(50) DEFAULT NULL,
+  `concerned_department` varchar(50) NOT NULL,
   `summary` varchar(50) NOT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID` (`ID`),
@@ -125,7 +125,7 @@ CREATE TABLE `tickets` (
   CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`assigned_to`) REFERENCES `users` (`ID`),
   CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`status`) REFERENCES `status` (`value`),
   CONSTRAINT `tickets_ibfk_5` FOREIGN KEY (`concerned_department`) REFERENCES `departments` (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +134,7 @@ CREATE TABLE `tickets` (
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (5,'Am o problemaSi problema nu-i mica',2,1,3,'Pending','Production','New ticket'),(9,'TO DO: Integreaza meniul in pagina',1,1,3,'Solved','IT','New ticket'),(11,'TO DO: Creaza paginile pentru ADMIN, MANAGER, OWNER. Vezi detalii in caiet.',1,1,3,'Solved','IT','New ticket'),(12,'TO DO: add pagination to tickets',1,1,NULL,'Unsolved','IT','New ticket'),(13,'TO DO: add better ticket formatting(Bold, Italic, newline)',1,1,NULL,'Unsolved','IT','New ticket'),(14,'TO DO: generate register page options based on DB informations',1,1,NULL,'Solved','IT','New ticket'),(15,'TO DO: add a destination for Hello, User hyperlink',1,1,NULL,'Solved','IT','New ticket'),(17,'Vine iarna.',3,NULL,6,'Pending','Production','New ticket'),(21,'S-a rupt clanta de la intrare.',7,7,6,'Solved','Production','New ticket'),(22,'Cineva mi-a furat mickey-mouseul.',2,1,NULL,'Solved','IT','New ticket'),(23,'Ticket for Production',7,NULL,6,'Pending','Production','New ticket'),(25,'TO DO: add concerned_department to TicketBean.java *** change department field to openedByDepartment',1,3,3,'Solved','IT','New ticket'),(26,'TO DO: implement DELET TICKET functionality',1,1,NULL,'Solved','IT','New ticket'),(27,'TO DO: beautify getTickets() functions',1,1,NULL,'Solved','IT','New ticket'),(28,'TO DO: javascript + JAVA  individual ticket update after operation(Close, delete, assign). getTicket(ticketId)',1,1,NULL,'Solved','IT','New ticket'),(29,'TO DO:    Make dashboard chart controller',1,1,NULL,'Solved','IT','New ticket'),(30,'TO DO: Fix access level role',1,1,NULL,'Solved','IT','New ticket'),(31,'TO DO: add ticket summary in DB.  add ticket summary in My tickets',1,1,NULL,'Solved','HR','New ticket'),(32,'TO DO: add filter result:  Found 999 tickets',1,1,NULL,'Solved','HR','New ticket'),(35,'Don directore, cand imi mariti si mie salariul?',2,NULL,NULL,'Open','HR','Salariu'),(36,'Admin -> Review Tickets -> refresh ticket after update',3,1,NULL,'Solved','IT','TO DO'),(37,'Moderator -> Manage Tickets -> refresh ticket after update',7,1,3,'Solved','IT','TO DO'),(38,'improved security',2,NULL,NULL,'Open','HR','Sql user test');
+INSERT INTO `tickets` VALUES (5,'Am o problemaSi problema nu-i mica',2,1,3,'Pending','Production','New ticket'),(9,'TO DO: Integreaza meniul in pagina',1,1,3,'Solved','IT','New ticket'),(11,'TO DO: Creaza paginile pentru ADMIN, MANAGER, OWNER. Vezi detalii in caiet.',1,1,3,'Solved','IT','New ticket'),(12,'TO DO: add pagination to tickets',1,1,NULL,'Unsolved','IT','New ticket'),(13,'TO DO: add better ticket formatting(Bold, Italic, newline)',1,1,NULL,'Unsolved','IT','New ticket'),(14,'TO DO: generate register page options based on DB informations',1,1,NULL,'Solved','IT','New ticket'),(15,'TO DO: add a destination for Hello, User hyperlink',1,1,NULL,'Solved','IT','New ticket'),(17,'Vine iarna.',3,NULL,6,'Pending','Production','New ticket'),(21,'S-a rupt clanta de la intrare.',24,7,6,'Solved','Production','New ticket'),(22,'Cineva mi-a furat mickey-mouseul.',2,1,NULL,'Solved','IT','New ticket'),(23,'Ticket for Production',24,NULL,6,'Pending','Production','New ticket'),(25,'TO DO: add concerned_department to TicketBean.java *** change department field to openedByDepartment',1,3,3,'Solved','IT','New ticket'),(26,'TO DO: implement DELET TICKET functionality',1,1,NULL,'Solved','IT','New ticket'),(27,'TO DO: beautify getTickets() functions',1,1,NULL,'Solved','IT','New ticket'),(28,'TO DO: javascript + JAVA  individual ticket update after operation(Close, delete, assign). getTicket(ticketId)',1,1,NULL,'Solved','IT','New ticket'),(29,'TO DO:    Make dashboard chart controller',1,1,NULL,'Solved','IT','New ticket'),(30,'TO DO: Fix access level role',1,1,NULL,'Solved','IT','New ticket'),(31,'TO DO: add ticket summary in DB.  add ticket summary in My tickets',1,1,NULL,'Solved','HR','New ticket'),(32,'TO DO: add filter result:  Found 999 tickets',1,1,NULL,'Solved','HR','New ticket'),(35,'Don directore, cand imi mariti si mie salariul?',2,NULL,NULL,'Open','HR','Salariu'),(36,'Admin -> Review Tickets -> refresh ticket after update',24,1,24,'Solved','IT','TO DO'),(37,'Moderator -> Manage Tickets -> refresh ticket after update',24,1,24,'Solved','IT','TO DO'),(55,'REST',24,1,6,'Unsolved','IT','REST delete');
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,7 +158,7 @@ CREATE TABLE `users` (
   KEY `role` (`role`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`department`) REFERENCES `departments` (`value`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`role`) REFERENCES `roles` (`value`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -167,7 +167,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'owner@helpdesk.com','IT','Owner','132d814a5f1bce2bdc178e40e55be265'),(2,'user@helpdesk.com','Production','User','132d814a5f1bce2bdc178e40e55be265'),(3,'admin@helpdesk.com','IT','Admin','132d814a5f1bce2bdc178e40e55be265'),(6,'mircea@gmail.com','Production','Admin','132d814a5f1bce2bdc178e40e55be265'),(7,'moderator@helpdesk.com','Production','Moderator','132d814a5f1bce2bdc178e40e55be265'),(23,'newuser@helpdesk.com','HR','Admin','512499f24a2f8d9730f53ce711640ec0');
+INSERT INTO `users` VALUES (1,'owner@helpdesk.com','IT','Owner','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(2,'user@helpdesk.com','Production','User','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(3,'admin@helpdesk.com','IT','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(6,'mircea@gmail.com','Production','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(7,'moderator@helpdesk.com','Production','Moderator','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(23,'newuser@helpdesk.com','HR','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(24,'super@helpdesk.com','IT','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(51,'asd','HR','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u'),(61,'asdasd','HR','Admin','$2a$10$gCm6K9XHCvwCvkcbgti6/u7kIBF8OBsei1ZHuaTmbZfl02oM49V9u');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,10 +188,10 @@ DROP TABLE IF EXISTS `columns_priv`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `columns_priv` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Table_name` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Column_name` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Db` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Table_name` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Column_name` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Column_priv` set('Select','Insert','Update','References') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`Host`,`Db`,`User`,`Table_name`,`Column_name`)
@@ -240,8 +240,8 @@ DROP TABLE IF EXISTS `db`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `db` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Db` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Select_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   `Insert_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   `Update_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
@@ -285,9 +285,9 @@ DROP TABLE IF EXISTS `default_roles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `default_roles` (
   `HOST` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `USER` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `USER` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `DEFAULT_ROLE_HOST` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '%',
-  `DEFAULT_ROLE_USER` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `DEFAULT_ROLE_USER` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   PRIMARY KEY (`HOST`,`USER`,`DEFAULT_ROLE_HOST`,`DEFAULT_ROLE_USER`)
 ) /*!50100 TABLESPACE `mysql` */ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin STATS_PERSISTENT=0 ROW_FORMAT=DYNAMIC COMMENT='Default roles';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -338,9 +338,9 @@ DROP TABLE IF EXISTS `func`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `func` (
-  `name` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `name` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `ret` tinyint NOT NULL DEFAULT '0',
-  `dl` char(128) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `dl` char(128) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `type` enum('function','aggregate') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   PRIMARY KEY (`name`)
 ) /*!50100 TABLESPACE `mysql` */ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin STATS_PERSISTENT=0 ROW_FORMAT=DYNAMIC COMMENT='User defined functions';
@@ -363,7 +363,7 @@ DROP TABLE IF EXISTS `global_grants`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `global_grants` (
-  `USER` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `USER` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `HOST` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
   `PRIV` char(32) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `WITH_GRANT_OPTION` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
@@ -505,7 +505,7 @@ UNLOCK TABLES;
 --
 
 /*!40000 ALTER TABLE `innodb_index_stats` DISABLE KEYS */;
-INSERT  IGNORE INTO `innodb_index_stats` VALUES ('helpdesk','departments','PRIMARY','2020-11-19 12:43:35','n_diff_pfx01',5,1,'value'),('helpdesk','departments','PRIMARY','2020-11-19 12:43:35','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','departments','PRIMARY','2020-11-19 12:43:35','size',1,NULL,'Number of pages in the index'),('helpdesk','departments','value','2020-11-19 12:43:35','n_diff_pfx01',5,1,'value'),('helpdesk','departments','value','2020-11-19 12:43:35','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','departments','value','2020-11-19 12:43:35','size',1,NULL,'Number of pages in the index'),('helpdesk','roles','PRIMARY','2020-11-09 15:42:50','n_diff_pfx01',3,1,'value'),('helpdesk','roles','PRIMARY','2020-11-09 15:42:50','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','roles','PRIMARY','2020-11-09 15:42:50','size',1,NULL,'Number of pages in the index'),('helpdesk','roles','value','2020-11-09 15:42:50','n_diff_pfx01',3,1,'value'),('helpdesk','roles','value','2020-11-09 15:42:50','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','roles','value','2020-11-09 15:42:50','size',1,NULL,'Number of pages in the index'),('helpdesk','status','PRIMARY','2020-11-09 15:43:02','n_diff_pfx01',4,1,'value'),('helpdesk','status','PRIMARY','2020-11-09 15:43:02','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','status','PRIMARY','2020-11-09 15:43:02','size',1,NULL,'Number of pages in the index'),('helpdesk','status','value','2020-11-09 15:43:02','n_diff_pfx01',4,1,'value'),('helpdesk','status','value','2020-11-09 15:43:02','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','status','value','2020-11-09 15:43:02','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','ID','2020-12-03 10:02:29','n_diff_pfx01',23,1,'ID'),('helpdesk','tickets','ID','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','ID','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','PRIMARY','2020-12-03 10:02:29','n_diff_pfx01',23,1,'ID'),('helpdesk','tickets','PRIMARY','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','PRIMARY','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','assigned_to','2020-12-03 10:02:29','n_diff_pfx01',3,1,'assigned_to'),('helpdesk','tickets','assigned_to','2020-12-03 10:02:29','n_diff_pfx02',23,1,'assigned_to,ID'),('helpdesk','tickets','assigned_to','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','assigned_to','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','closed_by','2020-12-03 10:02:29','n_diff_pfx01',4,1,'closed_by'),('helpdesk','tickets','closed_by','2020-12-03 10:02:29','n_diff_pfx02',23,1,'closed_by,ID'),('helpdesk','tickets','closed_by','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','closed_by','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','concerned_department','2020-12-03 10:02:29','n_diff_pfx01',3,1,'concerned_department'),('helpdesk','tickets','concerned_department','2020-12-03 10:02:29','n_diff_pfx02',23,1,'concerned_department,ID'),('helpdesk','tickets','concerned_department','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','concerned_department','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','opened_by','2020-12-03 10:02:29','n_diff_pfx01',4,1,'opened_by'),('helpdesk','tickets','opened_by','2020-12-03 10:02:29','n_diff_pfx02',23,1,'opened_by,ID'),('helpdesk','tickets','opened_by','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','opened_by','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','status','2020-12-03 10:02:29','n_diff_pfx01',4,1,'status'),('helpdesk','tickets','status','2020-12-03 10:02:29','n_diff_pfx02',23,1,'status,ID'),('helpdesk','tickets','status','2020-12-03 10:02:29','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','status','2020-12-03 10:02:29','size',1,NULL,'Number of pages in the index'),('helpdesk','users','ID','2020-12-02 16:28:41','n_diff_pfx01',5,1,'ID'),('helpdesk','users','ID','2020-12-02 16:28:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','ID','2020-12-02 16:28:41','size',1,NULL,'Number of pages in the index'),('helpdesk','users','PRIMARY','2020-12-02 16:28:41','n_diff_pfx01',5,1,'ID'),('helpdesk','users','PRIMARY','2020-12-02 16:28:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','PRIMARY','2020-12-02 16:28:41','size',1,NULL,'Number of pages in the index'),('helpdesk','users','department','2020-12-02 16:28:41','n_diff_pfx01',2,1,'department'),('helpdesk','users','department','2020-12-02 16:28:41','n_diff_pfx02',5,1,'department,ID'),('helpdesk','users','department','2020-12-02 16:28:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','department','2020-12-02 16:28:41','size',1,NULL,'Number of pages in the index'),('helpdesk','users','email','2020-12-02 16:28:41','n_diff_pfx01',5,1,'email'),('helpdesk','users','email','2020-12-02 16:28:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','email','2020-12-02 16:28:41','size',1,NULL,'Number of pages in the index'),('helpdesk','users','role','2020-12-02 16:28:41','n_diff_pfx01',4,1,'role'),('helpdesk','users','role','2020-12-02 16:28:41','n_diff_pfx02',5,1,'role,ID'),('helpdesk','users','role','2020-12-02 16:28:41','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','role','2020-12-02 16:28:41','size',1,NULL,'Number of pages in the index'),('mysql','component','PRIMARY','2020-11-07 13:47:48','n_diff_pfx01',0,1,'component_id'),('mysql','component','PRIMARY','2020-11-07 13:47:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','component','PRIMARY','2020-11-07 13:47:48','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2020-11-07 13:47:48','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2020-11-07 13:47:48','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2020-11-07 13:47:48','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2020-11-07 13:47:48','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2020-11-07 13:47:53','n_diff_pfx01',6,1,'variable'),('sys','sys_config','PRIMARY','2020-11-07 13:47:53','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2020-11-07 13:47:53','size',1,NULL,'Number of pages in the index');
+INSERT  IGNORE INTO `innodb_index_stats` VALUES ('helpdesk','departments','PRIMARY','2020-12-23 12:41:04','n_diff_pfx01',0,1,'value'),('helpdesk','departments','PRIMARY','2020-12-23 12:41:04','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','departments','PRIMARY','2020-12-23 12:41:04','size',1,NULL,'Number of pages in the index'),('helpdesk','departments','value','2020-12-23 12:41:04','n_diff_pfx01',0,1,'value'),('helpdesk','departments','value','2020-12-23 12:41:04','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','departments','value','2020-12-23 12:41:04','size',1,NULL,'Number of pages in the index'),('helpdesk','roles','PRIMARY','2020-12-23 12:41:05','n_diff_pfx01',0,1,'value'),('helpdesk','roles','PRIMARY','2020-12-23 12:41:05','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','roles','PRIMARY','2020-12-23 12:41:05','size',1,NULL,'Number of pages in the index'),('helpdesk','roles','value','2020-12-23 12:41:05','n_diff_pfx01',0,1,'value'),('helpdesk','roles','value','2020-12-23 12:41:05','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','roles','value','2020-12-23 12:41:05','size',1,NULL,'Number of pages in the index'),('helpdesk','status','PRIMARY','2020-12-23 12:41:06','n_diff_pfx01',0,1,'value'),('helpdesk','status','PRIMARY','2020-12-23 12:41:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','status','PRIMARY','2020-12-23 12:41:06','size',1,NULL,'Number of pages in the index'),('helpdesk','status','value','2020-12-23 12:41:06','n_diff_pfx01',0,1,'value'),('helpdesk','status','value','2020-12-23 12:41:06','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','status','value','2020-12-23 12:41:06','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','ID','2020-12-26 16:03:52','n_diff_pfx01',23,1,'ID'),('helpdesk','tickets','ID','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','ID','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','PRIMARY','2020-12-26 16:03:52','n_diff_pfx01',23,1,'ID'),('helpdesk','tickets','PRIMARY','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','PRIMARY','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','assigned_to','2020-12-26 16:03:52','n_diff_pfx01',4,1,'assigned_to'),('helpdesk','tickets','assigned_to','2020-12-26 16:03:52','n_diff_pfx02',23,1,'assigned_to,ID'),('helpdesk','tickets','assigned_to','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','assigned_to','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','closed_by','2020-12-26 16:03:52','n_diff_pfx01',4,1,'closed_by'),('helpdesk','tickets','closed_by','2020-12-26 16:03:52','n_diff_pfx02',23,1,'closed_by,ID'),('helpdesk','tickets','closed_by','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','closed_by','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','concerned_department','2020-12-26 16:03:52','n_diff_pfx01',3,1,'concerned_department'),('helpdesk','tickets','concerned_department','2020-12-26 16:03:52','n_diff_pfx02',23,1,'concerned_department,ID'),('helpdesk','tickets','concerned_department','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','concerned_department','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','opened_by','2020-12-26 16:03:52','n_diff_pfx01',4,1,'opened_by'),('helpdesk','tickets','opened_by','2020-12-26 16:03:52','n_diff_pfx02',23,1,'opened_by,ID'),('helpdesk','tickets','opened_by','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','opened_by','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','tickets','status','2020-12-26 16:03:52','n_diff_pfx01',4,1,'status'),('helpdesk','tickets','status','2020-12-26 16:03:52','n_diff_pfx02',23,1,'status,ID'),('helpdesk','tickets','status','2020-12-26 16:03:52','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','tickets','status','2020-12-26 16:03:52','size',1,NULL,'Number of pages in the index'),('helpdesk','users','ID','2020-12-26 16:03:40','n_diff_pfx01',9,1,'ID'),('helpdesk','users','ID','2020-12-26 16:03:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','ID','2020-12-26 16:03:40','size',1,NULL,'Number of pages in the index'),('helpdesk','users','PRIMARY','2020-12-26 16:03:40','n_diff_pfx01',9,1,'ID'),('helpdesk','users','PRIMARY','2020-12-26 16:03:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','PRIMARY','2020-12-26 16:03:40','size',1,NULL,'Number of pages in the index'),('helpdesk','users','department','2020-12-26 16:03:40','n_diff_pfx01',3,1,'department'),('helpdesk','users','department','2020-12-26 16:03:40','n_diff_pfx02',9,1,'department,ID'),('helpdesk','users','department','2020-12-26 16:03:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','department','2020-12-26 16:03:40','size',1,NULL,'Number of pages in the index'),('helpdesk','users','email','2020-12-26 16:03:40','n_diff_pfx01',9,1,'email'),('helpdesk','users','email','2020-12-26 16:03:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','email','2020-12-26 16:03:40','size',1,NULL,'Number of pages in the index'),('helpdesk','users','role','2020-12-26 16:03:40','n_diff_pfx01',4,1,'role'),('helpdesk','users','role','2020-12-26 16:03:40','n_diff_pfx02',9,1,'role,ID'),('helpdesk','users','role','2020-12-26 16:03:40','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('helpdesk','users','role','2020-12-26 16:03:40','size',1,NULL,'Number of pages in the index'),('mysql','component','PRIMARY','2020-12-23 12:41:10','n_diff_pfx01',0,1,'component_id'),('mysql','component','PRIMARY','2020-12-23 12:41:10','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','component','PRIMARY','2020-12-23 12:41:10','size',1,NULL,'Number of pages in the index'),('mysql','gtid_executed','PRIMARY','2020-12-23 12:39:56','n_diff_pfx01',0,1,'source_uuid'),('mysql','gtid_executed','PRIMARY','2020-12-23 12:39:56','n_diff_pfx02',0,1,'source_uuid,interval_start'),('mysql','gtid_executed','PRIMARY','2020-12-23 12:39:56','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('mysql','gtid_executed','PRIMARY','2020-12-23 12:39:56','size',1,NULL,'Number of pages in the index'),('sys','sys_config','PRIMARY','2020-12-23 12:40:11','n_diff_pfx01',6,1,'variable'),('sys','sys_config','PRIMARY','2020-12-23 12:40:11','n_leaf_pages',1,NULL,'Number of leaf pages in the index'),('sys','sys_config','PRIMARY','2020-12-23 12:40:11','size',1,NULL,'Number of pages in the index');
 /*!40000 ALTER TABLE `innodb_index_stats` ENABLE KEYS */;
 
 --
@@ -513,7 +513,7 @@ INSERT  IGNORE INTO `innodb_index_stats` VALUES ('helpdesk','departments','PRIMA
 --
 
 /*!40000 ALTER TABLE `innodb_table_stats` DISABLE KEYS */;
-INSERT  IGNORE INTO `innodb_table_stats` VALUES ('helpdesk','departments','2020-11-19 12:43:35',5,1,1),('helpdesk','roles','2020-11-09 15:42:50',3,1,1),('helpdesk','status','2020-11-09 15:43:02',4,1,1),('helpdesk','tickets','2020-12-03 10:02:29',23,1,6),('helpdesk','users','2020-12-02 16:28:41',5,1,4),('mysql','component','2020-11-07 13:47:48',0,1,0),('mysql','gtid_executed','2020-11-07 13:47:48',0,1,0),('sys','sys_config','2020-11-07 13:47:53',6,1,0);
+INSERT  IGNORE INTO `innodb_table_stats` VALUES ('helpdesk','departments','2020-12-23 12:41:04',0,1,1),('helpdesk','roles','2020-12-23 12:41:05',0,1,1),('helpdesk','status','2020-12-23 12:41:06',0,1,1),('helpdesk','tickets','2020-12-26 16:03:52',23,1,6),('helpdesk','users','2020-12-26 16:03:40',9,1,4),('mysql','component','2020-12-23 12:41:10',0,1,0),('mysql','gtid_executed','2020-12-23 12:39:56',0,1,0),('sys','sys_config','2020-12-23 12:40:11',6,1,0);
 /*!40000 ALTER TABLE `innodb_table_stats` ENABLE KEYS */;
 
 --
@@ -525,9 +525,9 @@ DROP TABLE IF EXISTS `password_history`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_history` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Password_timestamp` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `Password` text COLLATE utf8_bin,
+  `Password` text CHARACTER SET utf8 COLLATE utf8_bin,
   PRIMARY KEY (`Host`,`User`,`Password_timestamp` DESC)
 ) /*!50100 TABLESPACE `mysql` */ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin STATS_PERSISTENT=0 ROW_FORMAT=DYNAMIC COMMENT='Password history for user accounts';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -573,11 +573,11 @@ DROP TABLE IF EXISTS `procs_priv`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `procs_priv` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Db` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Routine_name` char(64) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
-  `Routine_type` enum('FUNCTION','PROCEDURE') COLLATE utf8_bin NOT NULL,
-  `Grantor` varchar(288) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Routine_type` enum('FUNCTION','PROCEDURE') CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
+  `Grantor` varchar(288) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Proc_priv` set('Execute','Alter Routine','Grant') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Host`,`Db`,`User`,`Routine_name`,`Routine_type`),
@@ -603,11 +603,11 @@ DROP TABLE IF EXISTS `proxies_priv`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `proxies_priv` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Proxied_host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `Proxied_user` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Proxied_user` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `With_grant` tinyint(1) NOT NULL DEFAULT '0',
-  `Grantor` varchar(288) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Grantor` varchar(288) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`Host`,`User`,`Proxied_host`,`Proxied_user`),
   KEY `Grantor` (`Grantor`)
@@ -659,9 +659,9 @@ DROP TABLE IF EXISTS `role_edges`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role_edges` (
   `FROM_HOST` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `FROM_USER` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `FROM_USER` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `TO_HOST` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `TO_USER` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `TO_USER` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `WITH_ADMIN_OPTION` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   PRIMARY KEY (`FROM_HOST`,`FROM_USER`,`TO_HOST`,`TO_USER`)
 ) /*!50100 TABLESPACE `mysql` */ ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin STATS_PERSISTENT=0 ROW_FORMAT=DYNAMIC COMMENT='Role hierarchy and role grants';
@@ -843,10 +843,10 @@ DROP TABLE IF EXISTS `tables_priv`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tables_priv` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `Db` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Table_name` char(64) COLLATE utf8_bin NOT NULL DEFAULT '',
-  `Grantor` varchar(288) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Db` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Table_name` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
+  `Grantor` varchar(288) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `Table_priv` set('Select','Insert','Update','Delete','Create','Drop','Grant','References','Index','Alter','Create View','Show view','Trigger') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
   `Column_priv` set('Select','Insert','Update','References') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '',
@@ -999,7 +999,7 @@ DROP TABLE IF EXISTS `user`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
   `Host` char(255) CHARACTER SET ascii COLLATE ascii_general_ci NOT NULL DEFAULT '',
-  `User` char(32) COLLATE utf8_bin NOT NULL DEFAULT '',
+  `User` char(32) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '',
   `Select_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   `Insert_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   `Update_priv` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
@@ -1037,8 +1037,8 @@ CREATE TABLE `user` (
   `max_updates` int unsigned NOT NULL DEFAULT '0',
   `max_connections` int unsigned NOT NULL DEFAULT '0',
   `max_user_connections` int unsigned NOT NULL DEFAULT '0',
-  `plugin` char(64) COLLATE utf8_bin NOT NULL DEFAULT 'caching_sha2_password',
-  `authentication_string` text COLLATE utf8_bin,
+  `plugin` char(64) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT 'caching_sha2_password',
+  `authentication_string` text CHARACTER SET utf8 COLLATE utf8_bin,
   `password_expired` enum('N','Y') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N',
   `password_last_changed` timestamp NULL DEFAULT NULL,
   `password_lifetime` smallint unsigned DEFAULT NULL,
@@ -1111,4 +1111,4 @@ CREATE TABLE IF NOT EXISTS `slow_log` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-12-03 10:17:26
+-- Dump completed on 2020-12-26 16:10:19

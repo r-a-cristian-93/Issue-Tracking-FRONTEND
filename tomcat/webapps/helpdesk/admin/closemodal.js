@@ -13,13 +13,15 @@ function closeTicket() {
 	var status = document.closeTicketForm.status.value;
 	
 	var request = new XMLHttpRequest();
+	request.withCredentials = true;
 	request.onreadystatechange = function() {
 		if(this.readyState==4 && this.status==200) {
 			hideCloseModal();
-			refreshTicket(ticketId);
+			var jsonTicket = JSON.parse(request.responseText);
+			refreshTicket(jsonTicket);
 		}		
 	}	
-	request.open('GET', '/helpdesk/admin/closeticket?ticketId='+ticketId+'&status='+status);
+	request.open('PUT', REST_API+'/tickets/'+ticketId+'/close?status=' + status);
 	request.send();
 }
 
@@ -34,28 +36,19 @@ function makeCloseOption(jsonTicket) {
 	return div;
 }
 
-function refreshTicket(ticketId) {	
-	var request = new XMLHttpRequest();
-	request.onreadystatechange = function () {
-		if(this.readyState==4 && this.status==200) {
-			jsonTicket = JSON.parse(this.responseText);
-			var old = document.getElementById(ticketId);
-			
-			var intRole = 0;
-			if (old.getElementsByClassName('close-option').length==1) {
-				intRole = 1;
-			}
-			if (old.getElementsByClassName('assign-option').length==1) {
-				intRole = 2;
-			}
-			if (old.getElementsByClassName('delete-option').length==1) {
-				intRole = 3;
-			}	
-			var ticket = buildTicket(jsonTicket[0], intRole);		
-			old.parentNode.replaceChild(ticket, old);
-		}
+function refreshTicket(jsonTicket) {
+	var old = document.getElementById(jsonTicket.id);
+	
+	var intRole = 0;
+	if (old.getElementsByClassName('close-option').length==1) {
+		intRole = 1;
 	}
-	//request.open('GET', '/helpdesk/admin/getticket?id='+ ticketId);
-	request.open('GET', '/helpdesk-rest/tickets/get/byId/'+ticketId);
-	request.send();
+	if (old.getElementsByClassName('assign-option').length==1) {
+		intRole = 2;
+	}
+	if (old.getElementsByClassName('delete-option').length==1) {
+		intRole = 3;
+	}	
+	var ticket = buildTicket(jsonTicket, intRole);		
+	old.parentNode.replaceChild(ticket, old);
 }

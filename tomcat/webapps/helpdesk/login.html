@@ -4,8 +4,8 @@
 		<title>Log in</title>
 		<link rel="stylesheet" href="style.css">
 		<link rel="stylesheet" href="style-login.css"/>
-		<script src="user/utility.js"></script>
 		<script src="jquery-3.5.1.js"></script>
+		<script src="user/utility.js"></script>		
 		<script src="login.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
 	</head>
@@ -14,12 +14,12 @@
 			<div id="login">
 				<div class="simple-box">
 					<div class="simple-box-title">LOG IN</div>
-					<form class="simple-box-content">						
+					<form name="login" class="simple-box-content">						
 						<label class="big-form"><b>Email</b></label>
 						<input id="username" type="text" class="big-form" placeholder="Enter your email address" required/>
 						<label class="big-form"><b>Password</b></label>
 						<input id="password" type="password" class="big-form" placeholder="Enter your password" required/>
-						<button id="form-login-submit" type="button" class="button big-form">LOG IN</button>
+						<button type="submit" class="button big-form">LOG IN</button>
 					</form>	
 				</div>
 			</div>	

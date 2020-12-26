@@ -5,11 +5,43 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function filterManageTickets() {
-	var request = new XMLHttpRequest;
-	var department = document.filter.department.value;
-	var status = document.filter.status.value;
+	var d = $("#filter-department").val();
+	var s = $('#filter-status').val();
+	var params = {};
 	
-	request.onreadystatechange = onreadyFilterTickets(3);
-	request.open('GET', '/helpdesk/owner/superfilter?department='+department+'&status='+status);
-	request.send();
+	if(d!='All') {
+		params['department'] = d;
+	}
+	if(s!='All') {
+		params['status'] = s;
+	}		
+	
+	$.when(getMyInfo()).done(function(info) {
+		var intRole;
+		switch(info.role) {
+			case 'Owner': intRole = 3; break;
+			case 'Moderator': intRole = 2; break;
+			case 'Admin': intRole = 1; break;
+			default: intRole = 0;
+		}
+		$.ajax({
+			method: 'GET',
+			dataType: 'json',
+			xhrFields: { withCredentials: true },
+			data: params,
+			url: REST_API + '/tickets/manage',
+			success: function(response) {
+				onreadyFilterTickets(response, intRole);
+			}
+		});				
+	});	
+}
+
+function getMyInfo() {
+	return $.ajax({
+		method: 'GET',
+		dataType: 'json',
+		xhrFields: { withCredentials: true },
+		url: REST_API + '/usermanagement/myinfo',
+	});
 }

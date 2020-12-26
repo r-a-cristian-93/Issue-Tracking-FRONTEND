@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Created-By: Maven WAR Plugin 3.3.1
+Build-Jdk-Spec: 11
+Implementation-Title: helpdesk-rest
+Implementation-Version: 0.0.1-SNAPSHOT
+Main-Class: org.springframework.boot.loader.WarLauncher
+Start-Class: rest.Application
+Spring-Boot-Version: 2.4.1
+Spring-Boot-Classes: WEB-INF/classes/
+Spring-Boot-Lib: WEB-INF/lib/
+

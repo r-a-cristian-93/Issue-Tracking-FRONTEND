@@ -4,16 +4,17 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 $(document).ready(function(){
-	$('#form-register-submit').click(function(){
+	$(document.register).submit(function(event){
+		event.preventDefault();
 		$.ajax({
 			method: 'POST',
 			xhrFields: { withCredentials:true },
 			url: REST_API + '/usermanagement/register',
 			data: {
-				username: $('#email').val(),
-				password: $('#password').val(),
-				department: $('#department').val(),
-				role: $('#role').val()				
+				username: document.register.email.value,
+				password: document.register.password.value,
+				department: document.register.department.value,
+				role: document.register.role.value				
 			},
 			success: function(response) {
 				window.location = CLIENT_URL + '/admin/register-successful.html';

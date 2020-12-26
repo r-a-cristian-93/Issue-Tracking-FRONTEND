@@ -15,8 +15,8 @@
 			<div id="show-menu" onclick="showMenu();"><img src="../icons/burger.png"></div>	
 			<span class="logo-small">HelpDesk.com</span>
 			<div id="personal-menu">
-				<a href="#home" id="welcome-user"></a>
-				<a href="/helpdesk" class="button" onclick="document.cookie = 'JWT=; expires=-1; path=/';">Log Out</a>
+				<a id="welcome-user"></a>
+				<a id="button-logout" class="button">Log Out</a>
 			</div>
 		</div>		
 		<div id="menu">
@@ -41,14 +41,14 @@
 				<div class="simple-box-content">
 					<form name="register">
 						<label class="big-form">Email</label>
-						<input id="email" type="text" class="big-form space-bottom" placeholder="Enter email address" required/>
+						<input name="email" type="text" class="big-form space-bottom" placeholder="Enter email address" required/>
 						<label class="big-form">Password</label>
-						<input id="password" type="password" class="big-form space-bottom" placeholder="Enter a password" required/>
+						<input name="password" type="password" class="big-form space-bottom" placeholder="Enter a password" required/>
 						<label class="big-form">Department</label>
-						<select class="big-form space-bottom" id="department" name="department" required></select>
+						<select class="big-form space-bottom" name="department" required></select>
 						<label class="big-form">Role</label>
-						<select class="big-form space-bottom" id="role" name="role" required></select>
-						<button id="form-register-submit" type="button" class="button big-form">Register</button>
+						<select class="big-form space-bottom" name="role" required></select>
+						<button type="submit" class="button big-form">Register</button>
 					</form>
 				</div>
 			</div>

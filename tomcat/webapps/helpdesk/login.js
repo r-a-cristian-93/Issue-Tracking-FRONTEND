@@ -1,6 +1,6 @@
 $(document).ready(function(){
-    $('#form-login-submit').click(function(){
-		console.log("wassup?");
+    $(document.login).submit(function(event){
+		event.preventDefault();
 		$.ajax({
 			method: 'post',
 			xhrFields: { withCredentials: true },	//takes the cookie

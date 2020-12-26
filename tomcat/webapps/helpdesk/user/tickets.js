@@ -7,9 +7,9 @@ function makeIdLabel(jsonTicket) {
 }
 
 function makeStatusLabel(jsonTicket) {
-	var text=document.createTextNode(jsonTicket.status.toUpperCase());
+	var text=document.createTextNode(jsonTicket.status.value.toUpperCase());
 	var h5=document.createElement('h5');
-	h5.className=jsonTicket.status.toLowerCase();
+	h5.className=jsonTicket.status.value.toLowerCase();
 	h5.appendChild(text);
 	return h5;
 }
@@ -62,31 +62,26 @@ function makeTicketCol(title, value) {
  * 3 - owner
  */
 
-function onreadyFilterTickets(intRole) {
-	return function() {
-		if(this.readyState==4 && this.status==200){
-			var jsonTickets = JSON.parse(this.responseText);
-			
-			if(intRole>0) {
-				document.filter.childNodes[7].innerHTML = 'Found ' + jsonTickets.length + ' tickets.'
-			}
-			
-			var divTickets = document.getElementsByClassName('ticket');
-			var length = divTickets.length;
-			for(i=0; i<length; i++) {
-				divTickets[0].remove();
-			}
-			
-			for(i=0; i<jsonTickets.length; i++) {
-				var ticket = buildTicket(jsonTickets[i], intRole);
-				document.getElementById('tickets').appendChild(ticket);
-			}
-		}
+function onreadyFilterTickets(jsonTickets, intRole) {
+	if(intRole>0) {
+		document.filter.childNodes[7].innerHTML = 'Found ' + jsonTickets.length + ' tickets.'
 	}
+	
+	var divTickets = document.getElementsByClassName('ticket');
+	var length = divTickets.length;
+	for(i=0; i<length; i++) {
+		divTickets[0].remove();
+	}
+	
+	for(i=0; i<jsonTickets.length; i++) {
+		var ticket = buildTicket(jsonTickets[i], intRole);
+		document.getElementById('tickets').appendChild(ticket);
+	}
+
 }
 
 function buildTicket(jsonTicket, intRole) {
-	var status = jsonTicket.status;
+	var status = jsonTicket.status.value;
 
 	var divTopLeft = document.createElement('div');
 	divTopLeft.className='ticket-top-left';
@@ -101,7 +96,7 @@ function buildTicket(jsonTicket, intRole) {
 	divTopHalf.className='ticket-top-half';
 	divTopHalf.appendChild(divTopLeft);
 	divTopHalf.appendChild(divTopRight);
-	
+		
 	var divBottomHalf = document.createElement('div');
 	divBottomHalf.className='ticket-bottom-half';
 	if(intRole>1) {
@@ -115,13 +110,13 @@ function buildTicket(jsonTicket, intRole) {
 	if(intRole>2) {
 		divBottomHalf.appendChild(makeDeleteOption(jsonTicket));
 	}
-	divBottomHalf.appendChild(makeTicketCol('Opened by', jsonTicket.openedBy));
+	divBottomHalf.appendChild(makeTicketCol('Opened by', jsonTicket.openedBy.email));
 				
 	if(jsonTicket.assignedTo) {
-		divBottomHalf.appendChild(makeTicketCol('Assigned to', jsonTicket.assignedTo));
+		divBottomHalf.appendChild(makeTicketCol('Assigned to', jsonTicket.assignedTo.email));
 	}
 	if(jsonTicket.closedBy) {
-		divBottomHalf.appendChild(makeTicketCol('Closed by', jsonTicket.closedBy));
+		divBottomHalf.appendChild(makeTicketCol('Closed by', jsonTicket.closedBy.email));
 	}	
 	
 	var ticket=document.createElement('div');
