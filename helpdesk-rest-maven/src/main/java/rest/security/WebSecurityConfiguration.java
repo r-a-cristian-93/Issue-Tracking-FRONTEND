@@ -1,7 +1,5 @@
 package rest.security;
 
-import org.springframework.http.HttpMethod;
-
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,23 +15,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-
+import lombok.*;
 
 import java.util.*;
 
 import static rest.ApplicationConstants.*;
 
 @Configuration
+@AllArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	private UserDetailsService userDetailsService;
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	public WebSecurityConfiguration(UserDetailsServiceImpl userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-			this.userDetailsService = userDetailsService;
-			this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-	}
+	private UserDetailsServiceImpl userDetailsService;
+	private BCryptPasswordEncoder bCrypt;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -54,10 +47,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.userDetailsService(userDetailsService)
-			.passwordEncoder(bCryptPasswordEncoder);
+			.passwordEncoder(bCrypt);
 	}
 	
 	@Bean
@@ -69,7 +62,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		conf.setAllowCredentials(true);
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", conf);
-		conf.getAllowedOrigins().forEach(System.out::println);
 		return source;
 	}
 }

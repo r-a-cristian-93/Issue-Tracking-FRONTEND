@@ -6,7 +6,6 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer{
 

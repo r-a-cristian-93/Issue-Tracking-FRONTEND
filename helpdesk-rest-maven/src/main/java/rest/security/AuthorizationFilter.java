@@ -33,17 +33,11 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		HttpServletResponse res,
 		FilterChain chain) throws IOException, ServletException {
 			
-		String jwtToken = getToken(req);
-			
-		//if has no cookie forward request and don't authenticate
-		if (jwtToken == null) {
-			chain.doFilter(req, res);
-			return;
+		String jwtToken = getToken(req);			
+		if (jwtToken != null) {		
+			UsernamePasswordAuthenticationToken authentication = getAuthentication(jwtToken);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
 		}
-		
-		//else process authentication and forward request
-		UsernamePasswordAuthenticationToken authentication = getAuthentication(jwtToken);
-		SecurityContextHolder.getContext().setAuthentication(authentication);
 		chain.doFilter(req, res);
 	}
 	
@@ -69,7 +63,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			.getClaim(JWT_COOKIE_CLAIM_ROLES)
 			.asList(SimpleGrantedAuthority.class);
 
-		System.out.println("decoded: " + user + " roles:  " + roles);
+		System.out.println("JWT decoded: " + user + " roles:  " + roles);
 		return new UsernamePasswordAuthenticationToken(user, null, roles);
 	}
 }

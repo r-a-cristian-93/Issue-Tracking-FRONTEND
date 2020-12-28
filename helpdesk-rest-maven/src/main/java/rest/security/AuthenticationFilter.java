@@ -22,31 +22,25 @@ import javax.servlet.ServletException;
 import java.util.*;
 import java.util.stream.*;
 import java.io.*;
+import lombok.*;
 
 import rest.db.models.UserModel;
 import static rest.ApplicationConstants.*;
 
+@AllArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private AuthenticationManager authManager;
-
-	public AuthenticationFilter(AuthenticationManager authManager) {
-		this.authManager = authManager;
-	}
 	
 	@Override
 	public Authentication attemptAuthentication(
 		HttpServletRequest request, 
 		HttpServletResponse response) throws AuthenticationException {
-		
-		UserModel credentials = UserModel.getInstance();			
-		credentials.setEmail(request.getParameter(LOGIN_PARAM_USERNAME));
-		credentials.setPassword(request.getParameter(LOGIN_PARAM_PASSWORD));
-					
+
 		return authManager
 			.authenticate(
 				new UsernamePasswordAuthenticationToken(
-					credentials.getEmail(), 
-					credentials.getPassword(),
+					request.getParameter(LOGIN_PARAM_USERNAME), 
+					request.getParameter(LOGIN_PARAM_PASSWORD),
 					new ArrayList<>()));
 	}
 	
@@ -59,11 +53,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			try {
 				//this auth object comes from UserDetailsServiceImpl
 				String email = ((User) auth.getPrincipal()).getUsername();	
-				List<String> roles = ((User) auth.getPrincipal()).getAuthorities()
+				List<String> roles = auth.getAuthorities()
 					.stream()
 					.map(a -> a.getAuthority())
 					.collect(Collectors.toList());
-				System.out.println(" successfulAuthentication roles " + roles);
 				String token = JWT.create()
 					.withIssuer(JWT_ISSUER)
 					.withClaim(JWT_COOKIE_CLAIM_EMAIL, email)
@@ -74,10 +67,9 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 				Cookie jwtCookie= new Cookie(JWT_COOKIE_NAME, token);
 				jwtCookie.setSecure(true);
 				jwtCookie.setPath("/");
-				jwtCookie.setMaxAge(JWT_AGE*60);
-				System.out.println("LOGIN OK");	
-				response.addCookie(jwtCookie);
-				
+				jwtCookie.setMaxAge(JWT_AGE*60);	
+				response.addCookie(jwtCookie);		
+				System.out.println("LOGIN OK " + email + " " + roles);		
 			}
 			catch (Exception e) { 
 				e.printStackTrace();
