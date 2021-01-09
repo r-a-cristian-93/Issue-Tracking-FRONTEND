@@ -6,7 +6,7 @@ Issue tracking application with ROLES:</br>
  - Manager - Can assign tickets to Admins for their department</br>
  - Owner - Can delete tickets and add new users.</br>
 </br>
-![Alt text](./demo/demo-1.png)
-![Alt text](./demo/demo-4.png)
-![Alt text](./demo/demo-2.png)
-![Alt text](./demo/demo-3.png)
+<img src="/demo/demo-1.png" />
+<img src="/demo/demo-4.png" />
+<img src="/demo/demo-2.png" />
+<img src="/demo/demo-3.png" />
