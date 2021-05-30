@@ -3,8 +3,8 @@ package rest;
 import java.util.*;
 
 public class ApplicationConstants {
-	public static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-	public static final String DB_URL = "jdbc:mysql://hd_database:3306/helpdesk";
+	public static final String DB_DRIVER = "com.mysql.cj.jdbc.Driver";
+	public static final String DB_URL = "jdbc:mysql://localhost:3306/helpdesk";
 	public static final String DB_USERNAME = "hd_user";
 	public static final String DB_PASSWORD = "hd_user";
 	public static final String LOGIN_PARAM_USERNAME = "username";

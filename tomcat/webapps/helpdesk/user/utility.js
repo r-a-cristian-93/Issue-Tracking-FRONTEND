@@ -1,4 +1,4 @@
-var REST_API = "http://localhost/helpdesk-rest"
+var REST_API = "http://localhost:8081"
 var CLIENT_URL = "http://localhost/helpdesk"
 
 function getDepartments(parse, select) {
