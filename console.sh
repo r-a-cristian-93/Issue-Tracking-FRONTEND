@@ -1,1 +1,1 @@
-docker exec -it hd_tomcat bash
+docker exec -it hd_frontend bash

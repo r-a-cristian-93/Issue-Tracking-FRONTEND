@@ -1,4 +1,4 @@
-docker stop hd_tomcat
-docker rm hd_tomcat
-docker rmi hd_tomcat
-docker build -t hd_tomcat .
+docker stop hd_frontend
+docker rm hd_frontend
+docker rmi hd_frontend
+docker build -t hd_frontend .
