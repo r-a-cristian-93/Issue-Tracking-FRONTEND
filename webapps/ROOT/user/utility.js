@@ -1,5 +1,5 @@
 var REST_API = "http://localhost:8081"
-var CLIENT_URL = "http://localhost/helpdesk"
+var CLIENT_URL = "http://localhost"
 
 function getDepartments(parse, select) {
 	$.ajax({
