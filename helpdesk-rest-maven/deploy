@@ -1,3 +1,0 @@
-mvn clean package &&
-rm -v -r ../tomcat/webapps/helpdesk-rest ;
-unzip -a target/helpdesk-rest-0.0.1-SNAPSHOT.war -d ../tomcat/webapps/helpdesk-rest
