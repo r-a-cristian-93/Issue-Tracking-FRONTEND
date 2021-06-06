@@ -1,3 +1,25 @@
+function assignTicket(ticketId, assignTo) {
+	return $.ajax({
+		method: 'PUT',
+		xhrFields: { withCredentials:true },
+		url: REST_API + '/tickets/' + ticketId + '/update',
+		contentType: 'application/json',
+		data: JSON.stringify(assignTo)
+	});
+}
+
+$(document).ready(function(){
+	$(document.assignTicketForm).submit(function(event){
+		event.preventDefault();
+		var ticketId = event.target.ticketId.value;
+		var assignTo = {id: event.target.assignTo.value};
+		$.when(assignTicket(ticketId, assignTo)).then(function(data){
+			hideAssignModal();
+			refreshTicket(data);
+		});
+	});	
+});
+
 function showAssignModal(ticketId) {	
 	listAdmins();
 	document.assignTicketForm.ticketId.value = ticketId;
@@ -31,24 +53,6 @@ function listAdmins() {
 		}
 	});
 }
-
-function assignTicket() {
-	var ticketId = document.assignTicketForm.ticketId.value;
-	var assignTo = document.assignTicketForm.assignTo.value;
-	
-	var request = new XMLHttpRequest();
-	request.withCredentials = true;
-	request.onreadystatechange = function() {
-		if(this.readyState==4 && this.status==200) {
-			hideAssignModal();
-			var jsonTicket = JSON.parse(request.responseText);
-			refreshTicket(jsonTicket);		
-		}		
-	}	
-	request.open('PUT', REST_API+'/tickets/'+ticketId+'/update?assignTo=' +assignTo);
-	request.send();
-}
-
 
 function makeAssignOption(jsonTicket) {
 	var img = document.createElement('img');
