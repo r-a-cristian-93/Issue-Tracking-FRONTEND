@@ -9,9 +9,8 @@
 		<script src="../user/navigation.js"></script>
 		<script src="../user/utility.js"></script>
 		<script src="../user/tickets.js"></script>
-		<script src="../admin/closemodal.js"></script>
-		<script src="../admin/assignmodal.js"></script>
-		<script src="../admin/deletemodal.js"></script>
+		<script src="closemodal.js"></script>
+		<script src="assignmodal.js"></script>
 		<script src="deletemodal.js"></script>
 		<script src="manage-tickets.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">	
@@ -115,7 +114,7 @@
 					<form name="deleteTicketForm">
 						<label class="big-form"><b>This ticket will be deleted from all records.</b></label>
 						<input class="modal-hidden" type="text" name="ticketId">
-						<button type="button" class="button big-form" onclick="deleteTicket();">Delete ticket</button>
+						<button type="submit" class="button big-form">Delete ticket</button>
 					</form>
 				</div>
 			</div>
