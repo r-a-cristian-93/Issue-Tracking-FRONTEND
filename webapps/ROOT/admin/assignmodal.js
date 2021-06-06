@@ -1,7 +1,7 @@
 function assignTicket(ticketId, assignTo) {
 	return $.ajax({
 		method: 'PUT',
-		xhrFields: { withCredentials:true },
+		xhrFields: { withCredentials: true },
 		url: REST_API + '/tickets/' + ticketId + '/update',
 		contentType: 'application/json',
 		data: JSON.stringify(assignTo)
@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});	
 });
 
-function showAssignModal(ticketId) {	
+function showAssignModal(ticketId) {
 	listAdmins();
 	document.assignTicketForm.ticketId.value = ticketId;
 	document.getElementById("assignId").innerHTML = ticketId;
@@ -42,7 +42,7 @@ function listAdmins() {
 			var length = assignOptions.length;
 			for(i=0; i<length; i++) {
 				assignOptions[0].remove();
-			}		
+			}
 			for(i=0; i<jsonOptions.length; i++) {
 				var text = document.createTextNode(jsonOptions[i].email);
 				var option = document.createElement('option');
