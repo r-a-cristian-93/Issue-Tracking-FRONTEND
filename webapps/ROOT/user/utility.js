@@ -48,5 +48,5 @@ function setOptions(list, select) {
 function formSubmitToJson(event) {
 	const data = new FormData(event.target);
 	const object = Object.fromEntries(data.entries());
-	return object
+	return object;
 };

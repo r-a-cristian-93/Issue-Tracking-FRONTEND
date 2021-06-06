@@ -5,14 +5,13 @@ document.addEventListener("DOMContentLoaded", function(){
 $(document).ready(function() {
 	$(document.newticket).submit(function(event) {		
 		event.preventDefault();
+		var ticket = formSubmitToJson(event);
+		ticket.concernedDepartment = {value: ticket.concernedDepartment};
 		$.ajax({
 			method: 'post',
 			xhrFields: { withCredentials: true },
-			data : {
-				concernedDepartment: document.newticket.concernedDepartment.value,
-				summary: document.newticket.summary.value,
-				issue: document.newticket.issue.value			
-			},
+			contentType: "application/json",
+			data : JSON.stringify(ticket),
 			url: REST_API + '/tickets/add',
 			success: function(result) {
 				window.location = CLIENT_URL + '/user/new-ticket-created.html';

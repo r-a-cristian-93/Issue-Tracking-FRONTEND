@@ -6,13 +6,12 @@ document.addEventListener("DOMContentLoaded", function(){
 $(document).ready(function(){
 	$(document.register).submit(function(event){
 		event.preventDefault();
-		const data = formSubmitToJson(event);		
 		$.ajax({
 			method: 'POST',
 			xhrFields: { withCredentials:true },
 			url: REST_API + '/usermanagement/register',
 			contentType: "application/json",
-			data: JSON.stringify(data),
+			data: JSON.stringify(formSubmitToJson(event)),
 			success: function(response) {
 				window.location = CLIENT_URL + '/admin/register-successful.html';
 			},
