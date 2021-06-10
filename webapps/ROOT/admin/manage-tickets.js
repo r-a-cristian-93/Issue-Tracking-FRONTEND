@@ -18,7 +18,7 @@ function filterManageTickets() {
 	
 	$.when(getMyInfo()).done(function(info) {
 		var intRole;
-		switch(info.role) {
+		switch(info.role.value) {
 			case 'Owner': intRole = 3; break;
 			case 'Moderator': intRole = 2; break;
 			case 'Admin': intRole = 1; break;
