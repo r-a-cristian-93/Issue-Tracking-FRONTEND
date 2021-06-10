@@ -16,18 +16,18 @@ function getMenu() {
 		xhrFields: { withCredentials: true},
 		url: REST_API + '/usermanagement/myinfo',
 		success: function(response) {
-			document.getElementById('access-level').innerHTML = response.role.toUpperCase();
-			document.getElementById('welcome-user').innerHTML="Hello, " + response.email;
+			document.getElementById('access-level').innerHTML = response.role.value.toUpperCase();
+			document.getElementById('welcome-user').innerHTML="Hello, " + response.firstname + " " + response.lastname;
 			document.getElementById('welcome-user').setAttribute('href', '');
 			document.getElementById('button-logout').setAttribute('href', CLIENT_URL);
 			
 			addMenuItem('Dashboard', CLIENT_URL + '/user/dashboard.html');
 			addMenuItem('New Ticket', CLIENT_URL + '/user/new-ticket.html');
 			addMenuItem('My Tickets', CLIENT_URL + '/user/my-tickets.html');
-			if(response.role!='User') {
+			if(response.role.value!='User') {
 				addMenuItem('Manage Tickets', CLIENT_URL + '/admin/manage-tickets.html');
 			}
-			if(response.role=='Owner') {
+			if(response.role.value=='Owner') {
 				addMenuItem('Register', CLIENT_URL + '/admin/register.html');
 			}
 						
